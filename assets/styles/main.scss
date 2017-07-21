@@ -87,7 +87,7 @@
 // custom (.config includes inuit config)
 
 @import "settings/settings.config";
-$show-baseline: false; // Doesn't work in IE and Edge
+$show-baseline: true; // Doesn't work in IE and Edge
 @import "settings/settings.typography";
 @import "settings/settings.main";
 
@@ -144,7 +144,7 @@ $show-baseline: false; // Doesn't work in IE and Edge
 
 // inuit (modified / extended)
 @import "elements/elements.page";
-@import "elements/elements.typography";
+// @import "elements/elements.typography";
 // @import "elements/elements.forms";
 
 // custom
@@ -181,6 +181,12 @@ $inuit-wrapper-width: 1480px;
 @import "objects/objects.button-group";
 @import "objects/objects.flexgrid";
 @import "objects/objects.search-bar";
+
+@import "objects/objects.blockquote";
+
+@import "objects/objects.header";
+@import "objects/objects.header-nav";
+@import "objects/objects.header-logo";
 
 
 

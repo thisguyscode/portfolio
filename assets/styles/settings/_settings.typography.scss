@@ -44,7 +44,7 @@ $base-line-height:				($px-line-height / $px-font-size); // ! Don't change this!
 $rhythm:						      ($base-font-size * $base-line-height); // ! Don't change this!
 // ! ----------
 
-$header-trailer:				  $rhythm * 0.5;
+$heading-trailer:				  $rhythm * 0.5;
 $paragraph-trailer:				$rhythm * 1;
 
 // Modular scale - see <_vr-calc-font-sizes.scss> for all preset scales
@@ -62,11 +62,8 @@ $font-sizes:					(
   'md',
   'lg',
   '--skip-1--',
-  '--skip-1--',
-  '--skip-1--',
-  '--skip-1--',
-  '--skip-1--',
   'xl',
+  '--skip-1--',
   '--skip-1--',
   '--skip-1--',
   'xxl',
@@ -85,3 +82,6 @@ $font-size-xl:					map-get($font-sizes, xl);
 $font-size-xxl:					map-get($font-sizes, xxl);
 $font-size-xxxl:				map-get($font-sizes, xxxl);
 // ! ----------
+
+
+$font-weight-semi: 600;

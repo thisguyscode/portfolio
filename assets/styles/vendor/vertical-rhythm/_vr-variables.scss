@@ -20,7 +20,7 @@ $base-line-height:				($px-line-height / $px-font-size);
 
 $rhythm:						($base-font-size * $base-line-height);
 
-$header-trailer:				$rhythm * 0.5 !default;
+$heading-trailer:				$rhythm * 0.5 !default;
 $paragraph-trailer:				$rhythm * 1 !default;
 
 // Modular scale - see <_vr-calc-font-sizes.scss> for all preset scales

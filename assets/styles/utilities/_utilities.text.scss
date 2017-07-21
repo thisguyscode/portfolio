@@ -7,3 +7,11 @@
 /**
  *
  */
+
+ .u-text--bold {
+   font-weight: $font-weight-semi;
+ }
+
+ .u-text--low-contrast {
+   color: $neutral-60;
+ }

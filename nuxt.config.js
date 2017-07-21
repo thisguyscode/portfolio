@@ -1,6 +1,6 @@
 module.exports = {
   router: {
-    base: '/tiny-people/'
+    base: '/portfolio/'
   },
   /*
   ** Headers of the page

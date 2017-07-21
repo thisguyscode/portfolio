@@ -1,26 +1,22 @@
 <template>
   
   <section class="">
-    <ogm-site-nav></ogm-site-nav>
+    <ogm-site-header></ogm-site-header>
 
     <div class="u-baseline-grid"></div>
 
     <nuxt/>
-
-    <ogm-temp-nav></ogm-temp-nav>
 
   </section>
   
 </template>
 
 <script>
-import ogmSiteNav from '~components/organisms/ogm-site-nav'
-import ogmTempNav from '~components/organisms/ogm-temp-nav'
+import ogmSiteHeader from '~components/organisms/ogm-site-header'
 
 export default {
   components: {
-    ogmSiteNav,
-    ogmTempNav
+    ogmSiteHeader
   }
 }
 </script>

@@ -19,10 +19,6 @@ export default {
 }
 </script>
 
-
-  </section>
-</template>
-
 <style>
   .container {
     padding: 100px;

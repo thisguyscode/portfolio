@@ -37,8 +37,11 @@
   }
 
     .o-header__nav-item {
-
+      margin-right: $unit-sm;
       
+      @include mq($from: desktop) {
+        margin-right: $unit-lg;
+      }
     }
 
 

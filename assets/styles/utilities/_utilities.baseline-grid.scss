@@ -7,7 +7,6 @@
 .u-baseline-grid {
   
   @if ($show-baseline == true) {
-		@include vr-baseline;
+    @include vr-baseline;
   }
-  
 }

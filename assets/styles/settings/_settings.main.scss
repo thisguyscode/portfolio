@@ -142,3 +142,8 @@ $inner-border-good-high-contrast: inset 0 0 0 1px rgba($clr-good, 1);
 $inner-border-bad: inset 0 0 0 1px rgba($clr-bad, .6);
 $inner-border-bad-low-contrast: inset 0 0 0 1px rgba($clr-bad, .3);
 $inner-border-bad-high-contrast: inset 0 0 0 1px rgba($clr-bad, 1);
+
+
+// Colors
+$baseline-color:						      $blue;
+$baseline-color-transparent:			rgba($baseline-color, 0.08);

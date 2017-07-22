@@ -37,13 +37,13 @@ module.exports = {
   */
   build: {
     vendor: [
+      '~plugins/vue-waypoint.js',
       '~plugins/webfont.config.js',
       '~plugins/vue-awesome.js'
     ],
     /*
     ** Run ESLINT on save
     */
-    
     extend (config, ctx) {
       const cssLoader = config.module.rules.find((loader) => loader.test.toString() === '/\\.scss$/')
       cssLoader.use.splice(2, 0, {

@@ -1,6 +1,7 @@
 <template>
   
-  <section class="">
+  <section class="main">
+
     <ogm-site-header></ogm-site-header>
 
     <div class="u-baseline-grid"></div>

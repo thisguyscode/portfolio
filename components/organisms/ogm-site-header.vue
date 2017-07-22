@@ -32,25 +32,9 @@
       </div>
 
   </div>
+  
 </template>
 
 
 <style lang="scss">
 </style>
-
-
-<script>
-export default {
-  data: () => {
-    return {
-      text: 'not-trigger-yet'
-    }
-  },
-  methods: {
-    waypointHandler (direction, going) {
-      console.log('logged')
-      // this.text = 'the Waypoint has been triggered with: direction: { x: ' + direction.x + ', y: ' + direction.y + ' } and going: ' + going
-    }
-  }
-}
-</script>

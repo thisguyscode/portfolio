@@ -8,11 +8,3 @@ WebFont.load({
     timeout: 2000
   }
 })
-
-WebFont.load({
-  google: {
-    families: ['Patua One'],
-    timeout: 2000,
-    text: 'tinyworld'
-  }
-})

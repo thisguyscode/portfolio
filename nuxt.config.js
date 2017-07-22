@@ -32,14 +32,28 @@ module.exports = {
   ** Customize the progress-bar color
   */
   loading: { color: '#3B8070' },
+  plugins: [
+    {
+      src: '~plugins/webfontloader.config.js',
+      ssr: false
+    },
+    {
+      src: '~plugins/vue-waypoint.js',
+      ssr: false
+    },
+    {
+      src: '~plugins/vue-awesome.js',
+      ssr: false
+    }
+  ],
   /*
   ** Build configuration
   */
   build: {
     vendor: [
-      '~plugins/vue-waypoint.js',
-      '~plugins/webfont.config.js',
-      '~plugins/vue-awesome.js'
+      'vue-awesome',
+      'webfontloader',
+      'vue-waypoint'
     ],
     /*
     ** Run ESLINT on save

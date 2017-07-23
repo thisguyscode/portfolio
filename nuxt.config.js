@@ -51,9 +51,7 @@ module.exports = {
   */
   build: {
     vendor: [
-      'webfontloader',
-      'vue-waypoint',
-      'vue-awesome'
+      'webfontloader'
     ],
     /*
     ** Run ESLINT on save

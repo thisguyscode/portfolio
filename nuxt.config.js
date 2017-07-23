@@ -56,13 +56,17 @@ module.exports = {
     vendor: [
       'webfontloader'
     ],
+    postcss: [],
     /*
     ** Run ESLINT on save
     */
     extend (config, ctx) {
       const cssLoader = config.module.rules.find((loader) => loader.test.toString() === '/\\.scss$/')
       cssLoader.use.splice(2, 0, {
-        loader: 'postcss-loader'
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: true
+        }
       })
       if (ctx.isClient) {
         config.module.rules.push({

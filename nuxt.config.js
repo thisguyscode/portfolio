@@ -62,10 +62,7 @@ module.exports = {
     extend (config, ctx) {
       const cssLoader = config.module.rules.find((loader) => loader.test.toString() === '/\\.scss$/')
       cssLoader.use.splice(2, 0, {
-        loader: 'postcss-loader',
-        options: {
-          sourceMap: true
-        }
+        loader: 'postcss-loader'
       })
       if (ctx.isClient) {
         config.module.rules.push({

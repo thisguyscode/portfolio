@@ -17,6 +17,9 @@ module.exports = {
     ],
     htmlAttrs: [
       { class: 'wf-loading' }
+    ],
+    style: [
+      { cssText: '.wf-loading { opacity: 0; visibility: hidden } .wf-active { opacity: 1; visibility: visible; transition: opacity .7s ease }', type: 'text/css' }
     ]
   },
   /*

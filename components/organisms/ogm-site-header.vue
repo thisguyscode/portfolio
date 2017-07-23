@@ -19,7 +19,7 @@
             </nuxt-link>
           </li>
           <li class="o-header__nav-item  o-list-inline__item">
-            <nuxt-link class="o-header__link" to="profile">
+            <nuxt-link class="o-header__link" to="other">
               Profile
             </nuxt-link>
           </li>

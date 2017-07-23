@@ -1,10 +1,15 @@
 <template>
   <section class="o-box">
+    
+    <div class="o-wrapper">
+      
+      <h2>other</h2>
 
-    <v-waypoint @waypoint-in="inHandler" @waypoint-out="outHandler"></v-waypoint>
-    <h1>{{ text }}</h1>
+      <v-waypoint @waypoint="waypointHandler"></v-waypoint>
+      
+      <h1>{{text}}</h1>
 
-    <div>
+
       <blockquote class="o-blockquote o-blockquote--large">
         <p class="o-blockquote__text  u-text--bold">
           I make digital interfaces for humans.
@@ -13,6 +18,7 @@
           It&#39;s mostly putting text in boxes.
         </p>
       </blockquote>
+
     </div>
     
   </section>
@@ -26,19 +32,12 @@ export default {
     }
   },
   methods: {
-    inHandler () {
-      this.text = 'going in'
-    },
-    outHandler () {
-      this.text = 'going out'
+    waypointHandler (direction, going) {
+      this.text = 'the Waypoint has been triggered with: direction: { x: ' + direction.x + ', y: ' + direction.y + ' } and going: ' + going
     }
   }
 }
 </script>
 
 <style>
-  .container {
-    padding: 100px;
-    text-align: center;
-  }
 </style>

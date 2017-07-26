@@ -1,10 +1,7 @@
 <template>
   <section class="o-box">
 
-    <ogm-site-header></ogm-site-header>
-
-    <v-waypoint @waypoint="waypointContentTop"></v-waypoint>
-    {{ text }}
+    <atm-blockquote></atm-blockquote>
 
     <nuxt-child/>
 
@@ -12,23 +9,12 @@
 </template>
 
 <script>
-import ogmSiteHeader from '~components/organisms/ogm-site-header'
-import ogmTempNav from '~components/organisms/ogm-temp-nav'
+import atmBlockquote from '~components/atoms/atm-blockquote.vue'
 
 export default {
-  data: () => {
-    return {
-      text: 'not-trigger-yet'
-    }
-  },
-  methods: {
-    waypointContentTop (direction, going) {
-      this.text = 'the Waypoint has been triggered with: direction: { x: ' + direction.x + ', y: ' + direction.y + ' } and going: ' + going
-    }
-  },
+  layout: 'default',
   components: {
-    ogmTempNav,
-    ogmSiteHeader
+    atmBlockquote
   }
 }
 </script>

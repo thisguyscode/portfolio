@@ -146,6 +146,7 @@ padding: $unit-xxl $unit-xl;
 
 
 .c__logo__glasses-waypoint {
+  margin-top: $unit-xxl;
   margin-bottom: $unit-xl;
 }
 
@@ -176,7 +177,13 @@ padding: $unit-xxl $unit-xl;
   // transition: height .2s ease;
 }
 
-.c__logo__glasses-preceder,
+.c__logo__glasses-preceder {
+  position: fixed;
+  top: $header-padding;
+  left: $header-padding;
+  width: $glasses-max-width/4;
+}
+
 .c__logo__glasses {
   margin-right: auto;
   margin-left: auto;
@@ -184,13 +191,6 @@ padding: $unit-xxl $unit-xl;
 
   @include mq($from: desktop) {
     width:  $glasses-max-width;
-  }
-
-  &.s-is-reached {
-    position: fixed;
-    top: $header-padding;
-    left: $header-padding;
-    width: $glasses-max-width/4;
   }
 }
 

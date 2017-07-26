@@ -1,13 +1,13 @@
 module.exports = {
   router: {
     base: '/portfolio/',
-    extendRoutes (routes, resolve) {
-      routes.push({
-        name: 'projects',
-        path: '/projects',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
-    }
+    // extendRoutes (routes, resolve) {
+    //   routes.push({
+    //     name: 'projects',
+    //     path: '/projects',
+    //     component: resolve(__dirname, 'pages/index.vue')
+    //   })
+    // }
   },
   /*
   ** Headers of the page

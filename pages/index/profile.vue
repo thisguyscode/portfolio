@@ -1,16 +1,21 @@
 <template>
-  <div class="o-wrapper">
+  
+    <div class="o-wrapper">
       
-    <h2>profile</h2>
+      <h2>projects</h2>
 
-    <blockquote class="o-blockquote o-blockquote--large">
-      <p class="o-blockquote__text  u-text--bold">
-        I make digital interfaces for humans.
-      </p>
-      <p class="o-blockquote__text  u-text--low-contrast">
-        It&#39;s mostly putting text in boxes.
-      </p>
-    </blockquote>
+      <atm-blockquote></atm-blockquote>
 
-  </div>
+    </div>
+    
 </template>
+
+<script>
+import atmBlockquote from '~components/atoms/atm-blockquote.vue'
+
+export default {
+  components: {
+    atmBlockquote
+  }
+}
+</script>

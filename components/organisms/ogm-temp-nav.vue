@@ -1,7 +1,7 @@
 <template>
 <ul class="o-fixed-footer o-flexgrid o-list-inline">
   <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/projects">projects</nuxt-link>
+    <nuxt-link to="/">projects</nuxt-link>
   </li>
   <li class="o-flexgrid__item o-list-inline__item">
     <nuxt-link to="/profile">profile</nuxt-link>

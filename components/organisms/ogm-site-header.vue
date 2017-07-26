@@ -24,7 +24,7 @@
     <div class="c__nav-list">
       <ul class="c__nav-list">
         <li class="c__nav-item">
-          <nuxt-link class="c__nav-link" to="/projects">
+          <nuxt-link class="c__nav-link" to="/">
             Projects
           </nuxt-link>
         </li>

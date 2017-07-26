@@ -34,7 +34,7 @@ module.exports = {
   */
   css: [
     {
-      src: '~assets/styles/main.scss',
+      src: '~assets/styles/global/global.scss',
       lang: 'scss'
     }
   ],

@@ -20,7 +20,7 @@
 
 <style lang="scss">
 
-@import '~assets/styles/components/imports';
+@import '~assets/styles/imports/imports';
 
  .o-fixed-footer {
    position: fixed;

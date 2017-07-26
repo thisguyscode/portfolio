@@ -14,8 +14,8 @@
 
 
 <style lang="scss">
-@import "~assets/styles/components/components.atm-button";
-@import "~assets/styles/components/components.ogm-site-nav";
+// @import "~assets/styles/components/components.atm-button";
+// @import "~assets/styles/components/components.ogm-site-nav";
 </style>
 
 

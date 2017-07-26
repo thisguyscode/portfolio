@@ -117,7 +117,7 @@ export default {
 <style lang="scss" scoped>
 
 // Import settings / tools
-@import "~assets/styles/components/imports";
+@import "~assets/styles/imports/imports";
 
 // Local variables
 $glasses-max-width: 264px;

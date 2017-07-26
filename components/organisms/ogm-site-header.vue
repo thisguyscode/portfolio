@@ -20,32 +20,19 @@
   
   <h2 class="c__tagline  u-text--low-contrast">digital interface designer</h2>
 
-    <v-waypoint @waypoint="waypointNavList"></v-waypoint>
-    <div class="c__nav-list">
-      <ul class="c__nav-list">
-        <li class="c__nav-item">
-          <nuxt-link class="c__nav-link" to="/">
-            Projects
-          </nuxt-link>
-        </li>
-        <li class="c__nav-item">
-          <nuxt-link class="c__nav-link" to="/profile">
-            Profile
-          </nuxt-link>
-        </li>
-        <li class="c__nav-item">
-          <nuxt-link class="c__nav-link" to="/contact">
-            Contact
-          </nuxt-link>
-        </li>
-      </ul>
-    </div>
+  <v-waypoint @waypoint="waypointNavList"></v-waypoint>
+  <mlc-site-nav></mlc-site-nav>
+  
 
 </div>
 </template>
 
 <script>
+import mlcSiteNav from '~components/molecules/mlc-site-nav'
 export default {
+  components: {
+    mlcSiteNav
+  },
   data: () => {
     return {
       logoGlassesReached: false,
@@ -127,10 +114,10 @@ $header-padding: $unit-sm;
 // Base class
 .c__ {
 text-align: center;
-padding: $unit-xxl $unit-xl;
+padding: $unit-xxl*2 $unit-xl;
 
 @include mq($from: tablet) {
-  padding: $unit-xxl;
+  padding: $unit-xxl*2;
 }
 
   &.s-is-fixed {
@@ -146,8 +133,9 @@ padding: $unit-xxl $unit-xl;
 
 
 .c__logo__glasses-waypoint {
-  margin-top: $unit-xxl;
-  margin-bottom: $unit-xl;
+  position: absolute;
+  top: 20px;
+  width: 100%;
 }
 
 // Logo
@@ -214,31 +202,4 @@ padding: $unit-xxl $unit-xl;
   margin-bottom: $unit-lg;
 }
 
-
-// Nav links
-.c__nav-list {
-  @include vr($font-display, $font-size-sm);
-}
-
-  .c__nav-item {
-    margin-right: $unit-sm;
-    
-    @include mq($from: desktop) {
-      margin-right: $unit-lg;
-    }
-  }
-
-  .c__nav-link {
-    
-    &:before {
-      content: '';
-      position: relative;
-      display: inline-block;
-      background-color: red;
-      width: .8em;
-      height: .8em;
-      margin-right: $unit-xs;
-    }
-
-  }
 </style>

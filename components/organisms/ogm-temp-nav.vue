@@ -1,13 +1,13 @@
 <template>
-<ul class="o-fixed-footer o-flexgrid o-list-inline">
-  <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/">projects</nuxt-link>
+<ul class="c__">
+  <li class="c__nav-item">
+    <nuxt-link class="c__nav-link" to="/">projects</nuxt-link>
   </li>
-  <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/profile">profile</nuxt-link>
+  <li class="c__nav-item">
+    <nuxt-link class="c__nav-link" to="/profile">profile</nuxt-link>
   </li>
-  <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/recache">Recache</nuxt-link>
+  <li class="c__nav-item">
+    <nuxt-link class="c__nav-link" to="/recache">recache</nuxt-link>
   </li>
 </ul>
 </template>
@@ -18,19 +18,22 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 @import '~assets/styles/imports/imports';
 
- .o-fixed-footer {
-   position: fixed;
-   margin: 0;
-   padding: 0;
-   text-align: center;
-   top: auto;
-   bottom: $unit-lg;
-   left: $unit-lg;
-   right: $unit-lg;
+.c__ {
+  position: fixed;
+  text-align: center;
+  top: auto;
+  bottom: $unit-lg;
+  left: $unit-lg;
+  list-style: none;
+}
+
+ .c__nav-item {
+   display: inline-block;
+   margin-right: $unit-xl;
  }
 
 </style>

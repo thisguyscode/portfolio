@@ -1,30 +1,20 @@
 <template>
   <section class="o-box">
-    
-    <div class="o-wrapper">
-      
-      <h2>index</h2>
 
-      <v-waypoint @waypoint="waypointHandler"></v-waypoint>
-      
-      <h1>{{text}}</h1>
+    <ogm-site-header></ogm-site-header>
 
+    <v-waypoint @waypoint="waypointContentTop"></v-waypoint>
+    {{ text }}
 
-      <blockquote class="o-blockquote o-blockquote--large">
-        <p class="o-blockquote__text  u-text--bold">
-          I make digital interfaces for humans.
-        </p>
-        <p class="o-blockquote__text  u-text--low-contrast">
-          It&#39;s mostly putting text in boxes.
-        </p>
-      </blockquote>
+    <nuxt-child/>
 
-    </div>
-    
   </section>
 </template>
 
 <script>
+import ogmSiteHeader from '~components/organisms/ogm-site-header'
+import ogmTempNav from '~components/organisms/ogm-temp-nav'
+
 export default {
   data: () => {
     return {
@@ -32,9 +22,13 @@ export default {
     }
   },
   methods: {
-    waypointHandler (direction, going) {
+    waypointContentTop (direction, going) {
       this.text = 'the Waypoint has been triggered with: direction: { x: ' + direction.x + ', y: ' + direction.y + ' } and going: ' + going
     }
+  },
+  components: {
+    ogmTempNav,
+    ogmSiteHeader
   }
 }
 </script>

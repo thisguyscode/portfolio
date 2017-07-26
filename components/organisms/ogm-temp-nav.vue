@@ -1,13 +1,13 @@
 <template>
 <ul class="o-fixed-footer o-flexgrid o-list-inline">
   <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/">Home</nuxt-link>
+    <nuxt-link to="/projects">projects</nuxt-link>
   </li>
   <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/user">User</nuxt-link>
+    <nuxt-link to="/profile">profile</nuxt-link>
   </li>
   <li class="o-flexgrid__item o-list-inline__item">
-    <nuxt-link to="/test">Test</nuxt-link>
+    <nuxt-link to="/recache">Recache</nuxt-link>
   </li>
 </ul>
 </template>

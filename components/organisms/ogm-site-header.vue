@@ -1,29 +1,29 @@
 <template>
-<div class="c__">
+<div class="ogm-site-header">
   
-  <div class="c__bar-placeholder">
+  <div class="__bar-placeholder">
     <div class="u-wrapper">
-      <div ref="jsGlassesPlaceholderFixed" class="c__glasses-placeholder-fixed"></div>
+      <div ref="jsGlassesPlaceholderFixed" class="__glasses-placeholder-fixed"></div>
     </div>
   </div>
 
-  <v-waypoint class="c__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
-  <div class="c__bar" :class="cssBar">
+  <v-waypoint class="__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
+  <div class="__bar" :class="cssBar">
     <div class="u-wrapper">
-      <div ref="jsGlasses" class="c__glasses" :class="cssGlasses">
+      <div ref="jsGlasses" class="__glasses" :class="cssGlasses">
         <a href="#" v-scroll-to="'#page-top'" class=""><span class="u-link-bloater"></span></a>
         <img src="~assets/images/logo-glasses.svg"/>
       </div>
     </div>
   </div>
 
-  <div ref="jsGlassesPlaceholderRelative" class="c__glasses-placeholder-relative"></div>
+  <div ref="jsGlassesPlaceholderRelative" class="__glasses-placeholder-relative"></div>
   
-  <div class="c__name">
+  <div class="__name">
     <img src="~assets/images/logo-name.svg"/>
   </div>
   
-  <h2 class="c__tagline  u-text--low-contrast">digital interface designer</h2>
+  <h2 class="__tagline  u-text--low-contrast">digital interface designer</h2>
 
   <v-waypoint @waypoint="waypointNavList"></v-waypoint>
   <mlc-site-nav></mlc-site-nav>
@@ -40,7 +40,6 @@ export default {
   },
   data: () => {
     return {
-      // glassesReached: false,
       glassesFixed: false
     }
   },
@@ -58,24 +57,16 @@ export default {
   },
   mounted () {
     this.setGlasses()
-    console.log('mounted')
   },
   methods: {
     setGlasses () {
-      console.log('setGlasses')
       var glasses = this.$refs.jsGlasses
-      var glassesHeight = glasses.clientHeight
-      var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
       glasses.removeAttribute('style')
-      glassesRelative.setAttribute('style', 'height:' + glassesHeight + 'px')
     },
     waypointLogoGlasses (direction, going) {
       var glasses = this.$refs.jsGlasses
       var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
       var glassesFixed = this.$refs.jsGlassesPlaceholderFixed
-
-      // var glassesOffsets = glasses.getBoundingClientRect()
-      // var glassesHeight = glassesOffsets.height
 
       var glassesRelativeOffsets = glassesRelative.getBoundingClientRect()
       var glassesRelativeWidth = glassesRelativeOffsets.width
@@ -134,98 +125,115 @@ export default {
 
 <style lang="scss" scoped>
 
-// Import settings / tools
+/* NOTE
+** There are various styles being added inline to the glasses as they are
+** scrolled past. These styles are removed once the element reaches the end
+** of the transition (in both directions).
+*/
+
+/* Import project settings
+   ====================================================================== */
 @import "~assets/styles/imports/imports";
 
-// Local variables
+
+/* Local variables
+   ====================================================================== */
 $glasses-max-width: 264px;
 $name-max-width: 292px;
 $header-padding: $unit-md;
 
 
-// Base
-.c__ {
+/* Base component class
+   ====================================================================== */
+.ogm-site-header {
   text-align: center;
-  padding: $unit-xxl $unit-lg;
+  padding: $unit-xxl $unit-md;
 
   @include mq($from: tablet) {
     padding: $unit-xxl;
   }
 }
 
-// Navbar
-.c__bar,
-.c__bar-placeholder {
-  width: 100%;
-  top: 0;
-  left: 0;
-}
+/* Navbar
+   ====================================================================== */
 
-.c__bar {
-  @at-root .c__bar-placeholder,
+/**
+ * 1. Simoulanteously sets the placeholder bar and fixed-state bar as fixed
+ * 2. Only set the padding once header becomes fixed (prevents page jumping)
+ * 3. Position the bar at the top
+ */
+
+.__bar {
+  @at-root .__bar-placeholder,
   &.s-is-fixed {
-    position: fixed;
+    position: fixed; /*[1]*/
+    padding: $header-padding; /*[2]*/
   }
 }
 
+.__bar,
+.__bar-placeholder {
+  width: 100%; /*[3]*/
+  top: 0; /*[3]*/
+  left: 0; /*[3]*/
+}
 
-// .c__glasses,
-// .c__glasses-placeholder-relative {
-//   width: $glasses-max-width/2;
 
-//   @include mq($from: desktop) {
-//     width: $glasses-max-width;
-//   }
-// }
+/* Glasses
+   ====================================================================== */
 
-// Glasses
-.c__glasses {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: auto;
-  width: $glasses-max-width/2;
-  margin-right: auto;
-  margin-left: auto;
+/**
+ * 1. Take the glasses out of the flow (see __glasses-placeholder-relative)
+      below for for positioning
+ * 2. Simultaneously set the final fixed position/size of the glasses and 
+ *    the associated placeholder
+ * 3. Remove the centering margins from [4]
+ * 4. Center on page
+ * 5. Set the width (must be divided by 2 or 4 for pixel-perfect edges)
+ * 6. Harcode the placeholder height to reduce amount of js required
+ * 7. Set the waypoint (scroll trigger) 1px from the top of the viewport
+ */
+
+.__glasses {
+  position: absolute; /*[1]*/  
   
-  @include mq($from: desktop) {
-    width:  $glasses-max-width;
-  }
-  
-  @at-root .c__glasses-placeholder-fixed,
+  @at-root .__glasses-placeholder-fixed,
   &.s-is-fixed {
-    margin: 0;
-    top: $header-padding;
-    left: $header-padding;
-    width: $glasses-max-width/4;
+    width: $glasses-max-width/4; /*[2]*/
+    margin: 0; /*[3]*/
   }
 }
 
-.c__glasses-placeholder-fixed {
-  position: absolute;
-}
-
-.c__glasses-placeholder-relative {
-  margin-right: auto;
-  margin-left: auto;
-  width: $glasses-max-width/2;
-  margin-bottom: $unit-md;
+.__glasses,
+.__glasses-placeholder-relative {
+  margin-right: auto; /*[4]*/
+  margin-left: auto; /*[4]*/
+  left: 0; /*[4]*/
+  right: 0; /*[4]*/
+  width: $glasses-max-width/2; /*[5]*/
 
   @include mq($from: desktop) {
-    width:  $glasses-max-width;
-    margin-bottom: $unit-lg;
+    width:  $glasses-max-width; /*[5]*/
   }
 }
 
-.c__glasses-waypoint {
-  position: absolute;
-  top: 1px;
-  width: 100%;
+.__glasses-placeholder-relative {
+  height: $unit-xxl;
+
+  @include mq($from: desktop) {
+    height: $unit-xxl*2;
+  }
+}
+
+.__glasses-waypoint {
+  position: absolute; /*[7]*/
+  top: 1px; /*[7]*/
 }
 
 
-// Name
-.c__name {
+/* Name
+   ====================================================================== */
+.__name {
   width: $name-max-width/2;
   margin-left: auto;
   margin-right: auto;
@@ -239,8 +247,9 @@ $header-padding: $unit-md;
 }
 
 
-// Tagline
-.c__tagline {
+/* Tagline
+   ====================================================================== */
+.__tagline {
   @include vr($font-display, $font-size-lg);
   margin-bottom: $unit-lg;
 }

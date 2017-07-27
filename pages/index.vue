@@ -2,7 +2,7 @@
   <section class="o-box">
 
     <atm-blockquote></atm-blockquote>
-
+    
     <nuxt-child/>
 
   </section>
@@ -12,6 +12,7 @@
 import atmBlockquote from '~components/atoms/atm-blockquote.vue'
 
 export default {
+  scrollToTop: false,
   layout: 'default',
   components: {
     atmBlockquote

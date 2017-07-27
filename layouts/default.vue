@@ -6,7 +6,7 @@
 
     <ogm-site-header></ogm-site-header>
 
-    <v-waypoint @waypoint="waypointContentTop"></v-waypoint>
+    <v-waypoint id="content-top" @waypoint="waypointContentTop"></v-waypoint>
     {{ text }}
 
     <nuxt/>
@@ -22,6 +22,7 @@ import ogmSiteHeader from '~/components/organisms/ogm-site-header'
 import ogmTempNav from '~/components/organisms/ogm-temp-nav'
 
 export default {
+  scrollToTop: false,
   components: {
     ogmSiteHeader,
     ogmTempNav

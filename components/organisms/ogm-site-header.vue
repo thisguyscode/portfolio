@@ -2,13 +2,17 @@
 <div class="c__">
   <v-waypoint class="c__logo__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
   <div class="c__logo">
-    <div class="c__logo__glasses-wrapper">
-      <div ref="jsLogoGlassesPreceder" class="c__logo__glasses-preceder" :class="classLogoGlassesPreceder"></div>
-      <div ref="jsLogoGlassesFiller" class="c__logo__glasses-filler"></div>
-      <div ref="jsLogoGlasses" class="c__logo__glasses" :class="classLogoGlasses">
-        <img src="~assets/images/logo-glasses.svg"/>
+    <!-- <div class="c__glasses-wrapper"> -->
+      
+      <div ref="jsGlassesPlaceholderFixed" class="c__glasses-placeholder-fixed"></div>
+      
+      <div ref="jsGlassesPlaceholderRelative" class="c__glasses-placeholder-relative">
+        <div ref="jsGlasses" class="c__glasses" :class="cssGlasses">
+          <img src="~assets/images/logo-glasses.svg"/>
+        </div>
       </div>
-    </div>
+
+    <!-- </div> -->
 
     <div class="c__logo__name-wrapper">
       <div class="c__logo__name">
@@ -35,62 +39,76 @@ export default {
   },
   data: () => {
     return {
-      logoGlassesReached: false,
-      logoGlassesMoved: false,
-      navLinksReached: false
+      // glassesReached: false,
+      glassesFixed: false
     }
   },
   computed: {
-    classLogoGlasses: function () {
+    cssGlasses: function () {
       return {
-        's-is-reached': this.logoGlassesMoved
-      }
-    },
-    classLogoGlassesPreceder: function () {
-      return {
-        's-is-reached': this.logoGlassesReached
-      }
-    },
-    classNavLinks: function () {
-      return {
-        's-is-reached': this.navLinksReached
+        's-is-fixed': this.glassesFixed
       }
     }
   },
+  mounted () {
+    this.setGlassesPlaceholderHeight()
+  },
   methods: {
+    setGlassesPlaceholderHeight () {
+      var glassesHeight = this.$refs.jsGlasses.clientHeight
+      var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
+      glassesRelative.setAttribute('style', 'height:' + glassesHeight + 'px')
+    },
     waypointLogoGlasses (direction, going) {
-      var glasses = this.$refs.jsLogoGlasses
-      var filler = this.$refs.jsLogoGlassesFiller
-      var preceder = this.$refs.jsLogoGlassesPreceder
+      var glasses = this.$refs.jsGlasses
+      var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
+      var glassesFixed = this.$refs.jsGlassesPlaceholderFixed
 
-      var glassesHeight = glasses.clientHeight
-      var glassesOffsets = glasses.getBoundingClientRect()
-      var glassesTop = glassesOffsets.top
-      var glassesLeft = glassesOffsets.left
+      // var glassesOffsets = glasses.getBoundingClientRect()
+      // var glassesHeight = glassesOffsets.height
 
-      var precederWidth = preceder.clientWidth
-      var precederOffsets = preceder.getBoundingClientRect()
-      var precederTop = precederOffsets.top
-      var precederLeft = precederOffsets.left
+      var glassesRelativeOffsets = glassesRelative.getBoundingClientRect()
+      var glassesRelativeWidth = glassesRelativeOffsets.width
+      var glassesRelativeTop = glassesRelativeOffsets.top
+      var glassesRelativeLeft = glassesRelativeOffsets.left
 
-      if (going === 'out') {
-        this.logoGlassesReached = true
+      var glassesFixedOffsets = glassesFixed.getBoundingClientRect()
+      var glassesFixedWidth = glassesFixedOffsets.width
+      var glassesFixedTop = glassesFixedOffsets.top
+      var glassesFixedLeft = glassesFixedOffsets.left
 
+      if (going === 'in') {
         glasses.setAttribute('style',
           'position: fixed;' +
-          'top: ' + glassesTop + 'px; ' +
-          'left: ' + glassesLeft + 'px; ' +
-          'width:' + precederWidth + 'px; ' +
-          'transform: translate(' + -(glassesLeft - precederLeft) + 'px,' + -(glassesTop - precederTop) + 'px' + ');'
+          'top: ' + glassesFixedTop + 'px; ' +
+          'left: ' + glassesFixedLeft + 'px; ' +
+          'width:' + glassesRelativeWidth + 'px; ' +
+          'transition: transform .2s ease, width .2s ease;' +
+          'transform: translate(' +
+            (glassesRelativeLeft - glassesFixedLeft) + 'px,' +
+            (glassesRelativeTop - glassesFixedTop) + 'px' +
+          ');'
         )
-        filler.setAttribute('style', 'height:' + glassesHeight + 'px')
-        // setTimeout(() => {
-        //   this.logoGlassesMoved = true
-        //   glasses.removeAttribute('style')
-        // }, 550)
-      } else if (going === 'in') {
-        glasses.removeAttribute('style')
-        filler.removeAttribute('style')
+        setTimeout(() => {
+          glasses.removeAttribute('style')
+          this.glassesFixed = false
+        }, 200)
+      } else if (going === 'out') {
+        glasses.setAttribute('style',
+          'position: fixed;' +
+          'top: ' + glassesRelativeTop + 'px; ' +
+          'left: ' + glassesRelativeLeft + 'px; ' +
+          'width:' + glassesFixedWidth + 'px; ' +
+          'transition: transform .2s ease, width .2s ease;' +
+          'transform: translate(' +
+            -(glassesRelativeLeft - glassesFixedLeft) + 'px,' +
+            -(glassesRelativeTop - glassesFixedTop) + 'px' +
+          ');'
+        )
+        setTimeout(() => {
+          glasses.removeAttribute('style')
+          this.glassesFixed = true
+        }, 200)
       }
     },
     waypointNavList (direction, going) {
@@ -112,23 +130,48 @@ $name-max-width: 292px;
 $header-padding: $unit-sm;
 
 // Base class
-.c__ {
-text-align: center;
-padding: $unit-xxl*2 $unit-xl;
 
-@include mq($from: tablet) {
-  padding: $unit-xxl*2;
-}
+.c__glasses {
 
+  @at-root .c__glasses-placeholder-fixed,
   &.s-is-fixed {
     position: fixed;
-    
+    top: $header-padding;
+    left: $header-padding;
+    width: $glasses-max-width/4;
   }
+}
 
-  &.s-is-slid-up {
-    transform: translateY(-60px);
+.c__glasses-placeholder-fixed {
+  background: blue;
+  height: $unit-md;
+}
+
+.c__glasses-placeholder-relative {
+  background: orange;
+}
+
+.c__glasses-placeholder-relative {
+  margin-right: auto;
+  margin-left: auto;
+  width: $glasses-max-width/2;
+  margin-bottom: $unit-md;
+
+  @include mq($from: desktop) {
+    width:  $glasses-max-width;
+    margin-bottom: $unit-lg;
   }
-  
+}
+
+
+
+.c__ {
+  text-align: center;
+  padding: $unit-xxl*2 $unit-xl;
+
+  @include mq($from: tablet) {
+    padding: $unit-xxl*2;
+  }
 }
 
 
@@ -154,23 +197,17 @@ padding: $unit-xxl*2 $unit-xl;
 
 }
 
-.c__logo__glasses-wrapper {
-  margin-bottom: $unit-md;
-  @include mq($from: desktop) {
-    margin-bottom: $unit-lg;
-  }
-}
 
 .c__logo__glasses-filler {
   // transition: height .2s ease;
 }
 
-.c__logo__glasses-preceder {
-  position: fixed;
-  top: $header-padding;
-  left: $header-padding;
-  width: $glasses-max-width/4;
-}
+// .c__logo__glasses-preceder {
+//   position: fixed;
+//   top: $header-padding;
+//   left: $header-padding;
+//   width: $glasses-max-width/4;
+// }
 
 .c__logo__glasses {
   margin-right: auto;
@@ -179,6 +216,14 @@ padding: $unit-xxl*2 $unit-xl;
 
   @include mq($from: desktop) {
     width:  $glasses-max-width;
+  }
+
+  &.s-is-reached,
+  :root.c-logo-glasses-preceder {
+    position: fixed;
+    top: $header-padding;
+    left: $header-padding;
+    width: $glasses-max-width/4;
   }
 }
 

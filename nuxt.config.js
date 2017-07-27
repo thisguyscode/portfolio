@@ -1,6 +1,10 @@
 module.exports = {
   router: {
     base: '/portfolio/',
+    scrollBehavior: function () {
+      console.log('Scroll behavior')
+      return false
+    }
     // extendRoutes (routes, resolve) {
     //   routes.push({
     //     name: 'projects',
@@ -43,6 +47,7 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   plugins: [
+    '~plugins/vue-scrollto.js',
     {
       src: '~plugins/webfontloader.config.js',
       ssr: false

@@ -14,6 +14,7 @@
 import atmBlockquote from '~components/atoms/atm-blockquote.vue'
 
 export default {
+  scrollToTop: false,
   components: {
     atmBlockquote
   }

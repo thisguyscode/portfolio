@@ -2,13 +2,16 @@
   <div class="c__">
     <ul class="c__nav-list">
       <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/">Projects</nuxt-link>
+        <nuxt-link class="c__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
       </li>
       <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/profile">Profile</nuxt-link>
+        <nuxt-link class="c__nav-link" to="/profile" v-scroll-to="'#content-top'">Projects</nuxt-link>
       </li>
       <li class="c__nav-item">
         <nuxt-link class="c__nav-link" to="/contact">Contact</nuxt-link>
+      </li>
+      <li class="c__nav-item">
+         <a href="#" v-scroll-to="'#test'">Scroll to #test</a> 
       </li>
     </ul>
   </div>

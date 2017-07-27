@@ -13,7 +13,11 @@
   <div class="__navbar-glasses" :class="cssGlassesBar">
     <div class="u-wrapper">
       <div ref="jsGlasses" class="__glasses" :class="cssGlasses">
-        <a href="#" v-scroll-to="'#page-top'" class=""><span class="u-link-bloater"></span></a>
+        
+        <nuxt-link to="/" v-scroll-to="'#page-top'">
+          <span class="u-link-bloater"></span>
+        </nuxt-link>
+
         <img src="~assets/images/logo-glasses.svg"/>
       </div>
     </div>
@@ -36,13 +40,13 @@
     <div class="u-wrapper">
       <ul class="__nav-list">
         <li class="__nav-item">
-          <nuxt-link class="__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
+          <nuxt-link class="__nav-link" to="/projects" v-scroll-to="'#content-top'">Projects</nuxt-link>
         </li>
         <li class="__nav-item">
           <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
         </li>
         <li class="__nav-item">
-          <nuxt-link class="__nav-link" to="/contact">Contact</nuxt-link>
+          <nuxt-link class="__nav-link" to="/contact" v-scroll-to="'#content-top'">Contact</nuxt-link>
         </li>
       </ul>
     </div>
@@ -58,6 +62,7 @@
 <script>
 import mlcSiteNav from '~components/molecules/mlc-site-nav'
 export default {
+  scrollToTop: false,
   components: {
     mlcSiteNav
   },
@@ -221,11 +226,14 @@ $name-max-width: 292px;
     position: fixed; /*[1]*/
     padding: $navbar-padding; /*[2]*/
     text-align: right;
+    @include mq($from: tablet) {
+      text-align: center;
+    }
   }
 }
 .__navbar-glasses {
   &.s-is-fixed {
-    padding: $navbar-padding 0 0 $navbar-padding
+    padding-bottom: 0;
   }
 }
 

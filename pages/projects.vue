@@ -1,13 +1,13 @@
 <template>
-  
-    <div class="o-wrapper">
-      
-      <h2>profile</h2>
+  <section class="o-box">
 
-      <atm-blockquote></atm-blockquote>
+    <h2>projects</h2>
 
-    </div>
+    <atm-blockquote></atm-blockquote>
     
+    <nuxt-child/>
+
+  </section>
 </template>
 
 <script>
@@ -21,3 +21,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>

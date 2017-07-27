@@ -1,17 +1,10 @@
 module.exports = {
   router: {
     base: '/portfolio/',
-    scrollBehavior: function () {
-      console.log('Scroll behavior')
+    scrollBehavior: function (to, from, savedPosition) {
+      if (savedPosition) return savedPosition
       return false
     }
-    // extendRoutes (routes, resolve) {
-    //   routes.push({
-    //     name: 'projects',
-    //     path: '/projects',
-    //     component: resolve(__dirname, 'pages/index.vue')
-    //   })
-    // }
   },
   /*
   ** Headers of the page

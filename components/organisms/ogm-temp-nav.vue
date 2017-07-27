@@ -1,7 +1,7 @@
 <template>
 <ul class="c__">
   <li class="c__nav-item">
-    <nuxt-link class="c__nav-link" to="/">projects</nuxt-link>
+    <nuxt-link class="c__nav-link" to="/projects">projects</nuxt-link>
   </li>
   <li class="c__nav-item">
     <nuxt-link class="c__nav-link" to="/profile">profile</nuxt-link>
@@ -23,18 +23,25 @@
 @import '~assets/styles/imports/imports';
 
 .c__ {
+  background: white;
+  @include inner-border(all, 1px, low);
+  padding: $unit-md;
   position: fixed;
   text-align: center;
   top: auto;
-  bottom: $unit-lg;
-  left: $unit-lg;
+  bottom: $unit-sm;
+  left: $unit-sm;
   list-style: none;
   z-index: 100;
 }
 
  .c__nav-item {
    display: inline-block;
-   margin-right: $unit-xl;
+   margin-right: $unit-md;
+
+   &:last-of-type {
+     margin-right: 0;
+   }
  }
 
 </style>

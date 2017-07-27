@@ -2,7 +2,7 @@
   
     <div class="o-wrapper">
       
-      <h2>projects</h2>
+      <h2>profile</h2>
 
       <atm-blockquote></atm-blockquote>
 

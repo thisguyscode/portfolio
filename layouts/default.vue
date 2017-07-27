@@ -5,13 +5,11 @@
     <div class="u-baseline-grid"></div>
 
     <ogm-site-header></ogm-site-header>
+    <ogm-temp-nav></ogm-temp-nav>
 
     <v-waypoint id="content-top" @waypoint="waypointContentTop"></v-waypoint>
-    {{ text }}
 
     <nuxt/>
-
-    <ogm-temp-nav></ogm-temp-nav>
 
   </section>
   

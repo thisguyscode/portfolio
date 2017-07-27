@@ -5,7 +5,7 @@
         <nuxt-link class="c__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
       </li>
       <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/profile" v-scroll-to="'#content-top'">Projects</nuxt-link>
+        <nuxt-link class="c__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
       </li>
       <li class="c__nav-item">
         <nuxt-link class="c__nav-link" to="/contact">Contact</nuxt-link>

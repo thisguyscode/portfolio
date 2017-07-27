@@ -57,12 +57,16 @@ export default {
     }
   },
   mounted () {
-    this.setGlassesPlaceholderHeight()
+    this.setGlasses()
+    console.log('mounted')
   },
   methods: {
-    setGlassesPlaceholderHeight () {
-      var glassesHeight = this.$refs.jsGlasses.clientHeight
+    setGlasses () {
+      console.log('setGlasses')
+      var glasses = this.$refs.jsGlasses
+      var glassesHeight = glasses.clientHeight
       var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
+      glasses.removeAttribute('style')
       glassesRelative.setAttribute('style', 'height:' + glassesHeight + 'px')
     },
     waypointLogoGlasses (direction, going) {
@@ -89,7 +93,7 @@ export default {
           'top: ' + glassesFixedTop + 'px; ' +
           'left: ' + glassesFixedLeft + 'px; ' +
           'width:' + glassesRelativeWidth + 'px; ' +
-          'transition: transform .2s ease, width .2s ease;' +
+          'transition: transform .3s ease-in-out, width .3s ease-in-out;' +
           'transform: translate(' +
             (glassesRelativeLeft - glassesFixedLeft) + 'px,' +
             (glassesRelativeTop - glassesFixedTop) + 'px' +
@@ -98,14 +102,15 @@ export default {
         setTimeout(() => {
           glasses.removeAttribute('style')
           this.glassesFixed = false
-        }, 200)
+        }, 300)
       } else if (going === 'out') {
         glasses.setAttribute('style',
           'position: fixed;' +
           'top: ' + glassesRelativeTop + 'px; ' +
           'left: ' + glassesRelativeLeft + 'px; ' +
           'width:' + glassesFixedWidth + 'px; ' +
-          'transition: transform .2s ease, width .2s ease;' +
+          'margin: 0;' +
+          'transition: transform .3s ease-in-out, width .3s ease-in-out;' +
           'transform: translate(' +
             -(glassesRelativeLeft - glassesFixedLeft) + 'px,' +
             -(glassesRelativeTop - glassesFixedTop) + 'px' +
@@ -114,7 +119,9 @@ export default {
         setTimeout(() => {
           glasses.removeAttribute('style')
           this.glassesFixed = true
-        }, 200)
+        }, 300)
+      } else {
+        glasses.removeAttribute('style')
       }
     },
     waypointNavList (direction, going) {
@@ -133,16 +140,16 @@ export default {
 // Local variables
 $glasses-max-width: 264px;
 $name-max-width: 292px;
-$header-padding: $unit-sm;
+$header-padding: $unit-md;
 
 
 // Base
 .c__ {
   text-align: center;
-  padding: $unit-xxl*2 $unit-xl;
+  padding: $unit-xxl $unit-lg;
 
   @include mq($from: tablet) {
-    padding: $unit-xxl*2;
+    padding: $unit-xxl;
   }
 }
 
@@ -162,14 +169,32 @@ $header-padding: $unit-sm;
 }
 
 
+// .c__glasses,
+// .c__glasses-placeholder-relative {
+//   width: $glasses-max-width/2;
+
+//   @include mq($from: desktop) {
+//     width: $glasses-max-width;
+//   }
+// }
+
 // Glasses
 .c__glasses {
   position: absolute;
   left: 0;
   right: 0;
+  height: auto;
+  width: $glasses-max-width/2;
+  margin-right: auto;
+  margin-left: auto;
+  
+  @include mq($from: desktop) {
+    width:  $glasses-max-width;
+  }
   
   @at-root .c__glasses-placeholder-fixed,
   &.s-is-fixed {
+    margin: 0;
     top: $header-padding;
     left: $header-padding;
     width: $glasses-max-width/4;

@@ -1,6 +1,6 @@
 <template>
   
-  <section class="main">
+  <section id="page-top" class="u-wrapper">
 
     <div class="u-baseline-grid"></div>
 
@@ -39,3 +39,6 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+</style>

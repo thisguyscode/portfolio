@@ -1,34 +1,35 @@
 <template>
 <div class="c__">
-  <v-waypoint class="c__logo__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
-  <div class="c__logo">
-    <!-- <div class="c__glasses-wrapper"> -->
-      
+  
+  <div class="c__bar-placeholder">
+    <div class="u-wrapper">
       <div ref="jsGlassesPlaceholderFixed" class="c__glasses-placeholder-fixed"></div>
-      
-      <div ref="jsGlassesPlaceholderRelative" class="c__glasses-placeholder-relative">
-        <div ref="jsGlasses" class="c__glasses" :class="cssGlasses">
-          <img src="~assets/images/logo-glasses.svg"/>
-        </div>
-      </div>
+    </div>
+  </div>
 
-    <!-- </div> -->
-
-    <div class="c__logo__name-wrapper">
-      <div class="c__logo__name">
-        <img src="~assets/images/logo-name.svg"/>
+  <v-waypoint class="c__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
+  <div class="c__bar" :class="cssBar">
+    <div class="u-wrapper">
+      <div ref="jsGlasses" class="c__glasses" :class="cssGlasses">
+        <a href="#" v-scroll-to="'#page-top'" class=""><span class="u-link-bloater"></span></a>
+        <img src="~assets/images/logo-glasses.svg"/>
       </div>
     </div>
-    
+  </div>
+
+  <div ref="jsGlassesPlaceholderRelative" class="c__glasses-placeholder-relative"></div>
+  
+  <div class="c__name">
+    <img src="~assets/images/logo-name.svg"/>
   </div>
   
   <h2 class="c__tagline  u-text--low-contrast">digital interface designer</h2>
 
   <v-waypoint @waypoint="waypointNavList"></v-waypoint>
   <mlc-site-nav></mlc-site-nav>
-  
 
 </div>
+
 </template>
 
 <script>
@@ -45,6 +46,11 @@ export default {
   },
   computed: {
     cssGlasses: function () {
+      return {
+        's-is-fixed': this.glassesFixed
+      }
+    },
+    cssBar: function () {
       return {
         's-is-fixed': this.glassesFixed
       }
@@ -129,13 +135,41 @@ $glasses-max-width: 264px;
 $name-max-width: 292px;
 $header-padding: $unit-sm;
 
-// Base class
 
-.c__glasses {
+// Base
+.c__ {
+  text-align: center;
+  padding: $unit-xxl*2 $unit-xl;
 
-  @at-root .c__glasses-placeholder-fixed,
+  @include mq($from: tablet) {
+    padding: $unit-xxl*2;
+  }
+}
+
+// Navbar
+.c__bar,
+.c__bar-placeholder {
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.c__bar {
+  @at-root .c__bar-placeholder,
   &.s-is-fixed {
     position: fixed;
+  }
+}
+
+
+// Glasses
+.c__glasses {
+  position: absolute;
+  left: 0;
+  right: 0;
+  
+  @at-root .c__glasses-placeholder-fixed,
+  &.s-is-fixed {
     top: $header-padding;
     left: $header-padding;
     width: $glasses-max-width/4;
@@ -143,12 +177,7 @@ $header-padding: $unit-sm;
 }
 
 .c__glasses-placeholder-fixed {
-  background: blue;
-  height: $unit-md;
-}
-
-.c__glasses-placeholder-relative {
-  background: orange;
+  position: absolute;
 }
 
 .c__glasses-placeholder-relative {
@@ -163,78 +192,22 @@ $header-padding: $unit-sm;
   }
 }
 
-
-
-.c__ {
-  text-align: center;
-  padding: $unit-xxl*2 $unit-xl;
-
-  @include mq($from: tablet) {
-    padding: $unit-xxl*2;
-  }
-}
-
-
-.c__logo__glasses-waypoint {
+.c__glasses-waypoint {
   position: absolute;
-  top: 20px;
+  top: 1px;
   width: 100%;
 }
 
-// Logo
-.c__logo {
-  position: relative;
-  text-align: center;
-  margin-bottom: $unit-lg;
+
+// Name
+.c__name {
+  width: $name-max-width/2;
   margin-left: auto;
   margin-right: auto;
-  width: $name-max-width/2;
+  margin-bottom: $unit-md;
 
   @include mq($from: desktop) {
-    width: $name-max-width;
-    height: $glasses-max-width;
-  }
-
-}
-
-
-.c__logo__glasses-filler {
-  // transition: height .2s ease;
-}
-
-// .c__logo__glasses-preceder {
-//   position: fixed;
-//   top: $header-padding;
-//   left: $header-padding;
-//   width: $glasses-max-width/4;
-// }
-
-.c__logo__glasses {
-  margin-right: auto;
-  margin-left: auto;
-  width: $glasses-max-width/2;
-
-  @include mq($from: desktop) {
-    width:  $glasses-max-width;
-  }
-
-  &.s-is-reached,
-  :root.c-logo-glasses-preceder {
-    position: fixed;
-    top: $header-padding;
-    left: $header-padding;
-    width: $glasses-max-width/4;
-  }
-}
-
-.c__logo__glasses {
-  transition: transform .5s ease, width .5s ease;
-}
-
-.c__logo__name {
-  width: $name-max-width/2;
-
-  @include mq($from: desktop) {
+    margin-bottom: $unit-lg;
     width: $name-max-width;
   }
 

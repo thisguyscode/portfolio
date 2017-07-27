@@ -1,5 +1,5 @@
 <template>
-  <div class="mlc-site-nav">
+  <div class="mlc-site-nav" :class="cssSiteNav">
     <ul class="__nav-list">
       <li class="__nav-item">
         <nuxt-link class="__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
@@ -16,7 +16,6 @@
 
 <script>
 export default {
-
 }
 </script>
 
@@ -50,7 +49,7 @@ export default {
    ====================================================================== */
 
 /**
- * 1. Remove default left margin applied to <ul>
+ * 1. Remove default left/bottom margin applied to <ul>
  * 2. Basic alignment and margins
  * 3. Set the font size for different breakpoints (maintaining
       vertial rhythm)
@@ -59,6 +58,14 @@ export default {
 
 .__nav-list {
   margin-left: 0; /*[1]*/
+  margin-bottom: 0; /*[1]*/
+
+  &.s-is-fixed {
+    position: fixed;
+    top: $navbar-padding;
+    right: $navbar-padding;
+    text-align: right;
+  }
 }
 
 

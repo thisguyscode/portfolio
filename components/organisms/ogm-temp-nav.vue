@@ -29,6 +29,7 @@
   bottom: $unit-lg;
   left: $unit-lg;
   list-style: none;
+  z-index: 100;
 }
 
  .c__nav-item {

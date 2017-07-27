@@ -1,14 +1,16 @@
 <template>
 <div class="ogm-site-header">
   
-  <div class="__bar-placeholder">
+  <!-- glasses placeholder (fixed position) -->
+  <div class="__navbar-placeholder">
     <div class="u-wrapper">
       <div ref="jsGlassesPlaceholderFixed" class="__glasses-placeholder-fixed"></div>
     </div>
   </div>
 
-  <v-waypoint class="__glasses-waypoint" @waypoint="waypointLogoGlasses"></v-waypoint>
-  <div class="__bar" :class="cssBar">
+  <!-- glasses (initial position) -->
+  <v-waypoint class="__glasses-waypoint" @waypoint="waypointGlasses"></v-waypoint>
+  <div class="__navbar-glasses" :class="cssGlassesBar">
     <div class="u-wrapper">
       <div ref="jsGlasses" class="__glasses" :class="cssGlasses">
         <a href="#" v-scroll-to="'#page-top'" class=""><span class="u-link-bloater"></span></a>
@@ -17,16 +19,37 @@
     </div>
   </div>
 
+  <!-- glasses placeholder (relative position)  -->
   <div ref="jsGlassesPlaceholderRelative" class="__glasses-placeholder-relative"></div>
   
+  <!-- name -->
   <div class="__name">
     <img src="~assets/images/logo-name.svg"/>
   </div>
   
+  <!-- tagline -->
   <h2 class="__tagline  u-text--low-contrast">digital interface designer</h2>
+  
+  <!-- links -->
+  <v-waypoint class="__links-waypoint" @waypoint="waypointLinks"></v-waypoint>
+  <div class="__navbar" ref="jsNavbar" :class="cssNavbar">
+    <div class="u-wrapper">
+      <ul class="__nav-list">
+        <li class="__nav-item">
+          <nuxt-link class="__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
+        </li>
+        <li class="__nav-item">
+          <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
+        </li>
+        <li class="__nav-item">
+          <nuxt-link class="__nav-link" to="/contact">Contact</nuxt-link>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-  <v-waypoint @waypoint="waypointNavList"></v-waypoint>
-  <mlc-site-nav></mlc-site-nav>
+  <!-- links placeholder (relative position)  -->
+  <div ref="jsLinksPlaceholderRelative" class="__links-placeholder-relative"></div>
 
 </div>
 
@@ -40,7 +63,8 @@ export default {
   },
   data: () => {
     return {
-      glassesFixed: false
+      glassesFixed: false,
+      linksFixed: false
     }
   },
   computed: {
@@ -49,9 +73,19 @@ export default {
         's-is-fixed': this.glassesFixed
       }
     },
-    cssBar: function () {
+    cssGlassesBar: function () {
       return {
         's-is-fixed': this.glassesFixed
+      }
+    },
+    cssLinks: function () {
+      return {
+        's-is-fixed': this.linksFixed
+      }
+    },
+    cssNavbar: function () {
+      return {
+        's-is-fixed': this.linksFixed
       }
     }
   },
@@ -63,7 +97,21 @@ export default {
       var glasses = this.$refs.jsGlasses
       glasses.removeAttribute('style')
     },
-    waypointLogoGlasses (direction, going) {
+    waypointLinks (direction, going) {
+      var navBar = this.$refs.jsNavbar
+      var linksPlaceholderRelative = this.$refs.jsLinksPlaceholderRelative
+      var linksHeight = navBar.clientHeight
+      if (going === 'in') {
+        this.linksFixed = false
+        linksPlaceholderRelative.removeAttribute('style')
+      } else if (going === 'out') {
+        linksPlaceholderRelative.setAttribute('style',
+          'height: ' + linksHeight + 'px; '
+        )
+        this.linksFixed = true
+      }
+    },
+    waypointGlasses (direction, going) {
       var glasses = this.$refs.jsGlasses
       var glassesRelative = this.$refs.jsGlassesPlaceholderRelative
       var glassesFixed = this.$refs.jsGlassesPlaceholderFixed
@@ -140,7 +188,6 @@ export default {
    ====================================================================== */
 $glasses-max-width: 264px;
 $name-max-width: 292px;
-$header-padding: $unit-md;
 
 
 /* Base component class
@@ -151,6 +198,10 @@ $header-padding: $unit-md;
 
   @include mq($from: tablet) {
     padding: $unit-xxl;
+  }
+  
+  @include mq($from: tablet) {
+    padding: $unit-xxl*2;
   }
 }
 
@@ -163,19 +214,45 @@ $header-padding: $unit-md;
  * 3. Position the bar at the top
  */
 
-.__bar {
-  @at-root .__bar-placeholder,
+.__navbar,
+.__navbar-glasses {
+  @at-root .__navbar-placeholder,
   &.s-is-fixed {
     position: fixed; /*[1]*/
-    padding: $header-padding; /*[2]*/
+    padding: $navbar-padding; /*[2]*/
+    text-align: right;
+  }
+}
+.__navbar-glasses {
+  &.s-is-fixed {
+    padding: $navbar-padding 0 0 $navbar-padding
   }
 }
 
-.__bar,
-.__bar-placeholder {
-  width: 100%; /*[3]*/
+.__navbar,
+.__navbar-glasses,
+.__navbar-placeholder {
+  line-height: $navbar-inner-height;
   top: 0; /*[3]*/
   left: 0; /*[3]*/
+  width: 100%; /*[3]*/
+}
+
+.__navbar-placeholder {
+  z-index: -1;
+}
+
+.__navbar {
+  width: 100%;
+  transition: box-shadow .5s ease, background-color .5s ease;
+  &.s-is-fixed {
+    @include inner-border(bottom, 1px);
+    background: white;
+    z-index: 10;
+  }
+}
+.__navbar-glasses {
+  z-index: 20;  
 }
 
 
@@ -202,6 +279,16 @@ $header-padding: $unit-md;
     width: $glasses-max-width/4; /*[2]*/
     margin: 0; /*[3]*/
   }
+}
+
+.__glasses {
+  &.s-is-fixed {
+    z-index: 20;
+  }
+}
+
+.__glasses-placeholder-fixed {
+  z-index: -1;
 }
 
 .__glasses,
@@ -254,4 +341,64 @@ $header-padding: $unit-md;
   margin-bottom: $unit-lg;
 }
 
+
+/* Nav Links
+   ====================================================================== */
+.__links-waypoint {
+  margin-bottom: $navbar-padding;
+}
+
+/**
+ * 1. Remove default left/bottom margin applied to <ul>
+ * 2. Basic alignment and margins
+ * 3. Set the font size for different breakpoints (maintaining
+      vertial rhythm)
+ * 2. Style and position the markers next to each link
+ */
+
+.__nav-list {
+  margin-left: 0; /*[1]*/
+  margin-bottom: 0; /*[1]*/
+
+  &.s-is-fixed {
+    position: fixed;
+    top: $navbar-padding;
+    right: $navbar-padding;
+    // text-align: right;
+  }
+}
+
+
+.__nav-item {
+  display: inline-block; /*[2]*/
+  margin-right: $unit-md; /*[2]*/
+  
+  @include mq($from: desktop) {
+    margin-right: $unit-lg; /*[2]*/
+  }
+
+  &:last-of-type {
+    margin-right: 0; /*[2]*/
+  }
+}
+
+
+.__nav-link {
+
+  font-size: $font-size-sm;
+
+  @include mq($from: desktop) {
+    font-size: $font-size-md;
+  }
+  
+  &:before {
+    content: '';
+    position: relative; /*[4]*/
+    display: inline-block; /*[4]*/
+    background-color: red; /*[4]*/
+    width: .8em; /*[4]*/
+    height: .8em; /*[4]*/
+    margin-right: $unit-xs; /*[4]*/
+  }
+}
 </style>

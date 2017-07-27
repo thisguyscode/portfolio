@@ -8,7 +8,7 @@
         <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
       </li>
       <li class="__nav-item">
-        <nuxt-link class="__nav-link" to="/contact">Contact</nuxt-link>
+        <nuxt-link class="__nav-link" to="/contact" v-scroll-to="'#content-top'">Contact</nuxt-link>
       </li>
     </ul>
   </div>
@@ -16,6 +16,7 @@
 
 <script>
 export default {
+  scrollToTop: false
 }
 </script>
 

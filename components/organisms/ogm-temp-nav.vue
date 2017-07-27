@@ -14,7 +14,7 @@
 
 <script>
   export default {
-
+    scrolltoTop: false
   }
 </script>
 

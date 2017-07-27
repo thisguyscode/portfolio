@@ -1,4 +1,6 @@
 export default function ({ redirect }) {
-  this.$scrollTo('#page-top')
+  if (process.BROWSER_BUILD) {
+    document.scrollTop(0)
+  }
   return redirect('/projects')
 }

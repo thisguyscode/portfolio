@@ -1,17 +1,14 @@
 <template>
-  <div class="c__">
-    <ul class="c__nav-list">
-      <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
+  <div class="mlc-site-nav">
+    <ul class="__nav-list">
+      <li class="__nav-item">
+        <nuxt-link class="__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
       </li>
-      <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
+      <li class="__nav-item">
+        <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
       </li>
-      <li class="c__nav-item">
-        <nuxt-link class="c__nav-link" to="/contact">Contact</nuxt-link>
-      </li>
-      <li class="c__nav-item">
-         <a href="#" v-scroll-to="'#test'">Scroll to #test</a> 
+      <li class="__nav-item">
+        <nuxt-link class="__nav-link" to="/contact">Contact</nuxt-link>
       </li>
     </ul>
   </div>
@@ -24,38 +21,77 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~assets/styles/imports/imports';
+/* NOTE
+** There are various styles being added inline to the glasses as they are
+** scrolled past. These styles are removed once the element reaches the end
+** of the transition (in both directions).
+*/
 
-.c__ {
-  @include vr($font-body, $font-size-sm);
-}
+/* Import project settings
+   ====================================================================== */
+@import "~assets/styles/imports/imports";
 
 
-.c__nav-list {
+/* Local variables
+   ====================================================================== */
+
+// NONE
+
+
+/* Base component class
+   ====================================================================== */
+
+.mlc-site-nav {
   
 }
 
 
-.c__nav-item {
-  display: inline-block;
-  margin-right: $unit-sm;
+/* Nav list / links
+   ====================================================================== */
+
+/**
+ * 1. Remove default left margin applied to <ul>
+ * 2. Basic alignment and margins
+ * 3. Set the font size for different breakpoints (maintaining
+      vertial rhythm)
+ * 2. Style and position the markers next to each link
+ */
+
+.__nav-list {
+  margin-left: 0; /*[1]*/
+}
+
+
+.__nav-item {
+  display: inline-block; /*[2]*/
+  margin-right: $unit-md; /*[2]*/
   
   @include mq($from: desktop) {
-    margin-right: $unit-lg;
+    margin-right: $unit-lg; /*[2]*/
+  }
+
+  &:last-of-type {
+    margin-right: 0; /*[2]*/
   }
 }
 
 
-.c__nav-link {
+.__nav-link {
+
+  @include vr($font-body, $font-size-sm); /*[3]*/
+
+  @include mq($from: desktop) {
+    @include vr($font-body, $font-size-md); /*[3]*/
+  }
   
   &:before {
     content: '';
-    position: relative;
-    display: inline-block;
-    background-color: red;
-    width: .8em;
-    height: .8em;
-    margin-right: $unit-xs;
+    position: relative; /*[4]*/
+    display: inline-block; /*[4]*/
+    background-color: red; /*[4]*/
+    width: .8em; /*[4]*/
+    height: .8em; /*[4]*/
+    margin-right: $unit-xs; /*[4]*/
   }
 }
 

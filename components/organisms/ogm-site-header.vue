@@ -224,16 +224,23 @@ $name-max-width: 292px;
   @at-root .__navbar-placeholder,
   &.s-is-fixed {
     position: fixed; /*[1]*/
-    padding: $navbar-padding; /*[2]*/
+    // padding: $navbar-padding; /*[2]*/
     text-align: right;
     @include mq($from: tablet) {
       text-align: center;
     }
   }
 }
+.__navbar, {
+  @at-root .__navbar-placeholder,
+  &.s-is-fixed {
+    // padding: $navbar-padding;
+  }
+} 
 .__navbar-glasses {
   &.s-is-fixed {
-    padding-bottom: 0;
+    padding-left: $navbar-padding;
+    padding-right: $navbar-padding;
   }
 }
 
@@ -291,6 +298,7 @@ $name-max-width: 292px;
 
 .__glasses {
   &.s-is-fixed {
+    top: $navbar-padding;
     z-index: 20;
   }
 }
@@ -353,7 +361,7 @@ $name-max-width: 292px;
 /* Nav Links
    ====================================================================== */
 .__links-waypoint {
-  margin-bottom: $navbar-padding;
+  // margin-bottom: $navbar-padding;
 }
 
 /**
@@ -379,23 +387,27 @@ $name-max-width: 292px;
 
 .__nav-item {
   display: inline-block; /*[2]*/
-  margin-right: $unit-md; /*[2]*/
+  // margin-right: $unit-md; /*[2]*/
   
   @include mq($from: desktop) {
-    margin-right: $unit-lg; /*[2]*/
+    // margin-right: $unit-lg; /*[2]*/
   }
 
   &:last-of-type {
-    margin-right: 0; /*[2]*/
+    // margin-right: 0; /*[2]*/
   }
 }
 
 
 .__nav-link {
-
+  text-decoration: none;
+  color: $neutral-60;
+  padding: $navbar-padding $navbar-padding/2;
   font-size: $font-size-sm;
+  display: block;
 
   @include mq($from: desktop) {
+    padding: $navbar-padding;
     font-size: $font-size-md;
   }
   
@@ -407,6 +419,12 @@ $name-max-width: 292px;
     width: .8em; /*[4]*/
     height: .8em; /*[4]*/
     margin-right: $unit-xs; /*[4]*/
+  }
+
+  &.nuxt-link-active {
+    background: $neutral-05;
+    margin-bottom: 1px;
+    color: $neutral-100;
   }
 }
 </style>

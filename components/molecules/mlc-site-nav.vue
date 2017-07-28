@@ -123,7 +123,7 @@ export default {
   }
 
   &.s-is-styled {
-    @include inner-border(bottom, 1px, low);
+    @include inner-border(bottom, 1px, high);
     background: white;
   }
 }
@@ -180,10 +180,11 @@ export default {
     content: '';
     position: relative; /*[4]*/
     display: inline-block; /*[4]*/
-    background-color: $neutral-100; /*[4]*/
+    background-color: $neutral-80; /*[4]*/
     width: .8em; /*[4]*/
     height: .8em; /*[4]*/
     margin-right: $unit-xs; /*[4]*/
+    transition: background-color .2s ease-in-out;
   }
 
   &:after {
@@ -200,6 +201,9 @@ export default {
 
   &:hover {
     color: $neutral-100;
+    &:before {
+      background-color: $neutral-100; /*[4]*/
+    }
     &:after {
       width: 100%;
       background-color: $neutral-100;
@@ -207,15 +211,15 @@ export default {
   }
 
   &.nuxt-link-active {
-    color: $red;
+    color: $blue;
 
     &:before {
-      background-color: $red; /*[4]*/
+      background-color: $blue; /*[4]*/
     }
 
     &:after {
       width: 100%;
-      background-color: $red;
+      background-color: $blue;
     }
   }
 }

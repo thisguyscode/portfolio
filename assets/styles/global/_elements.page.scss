@@ -20,9 +20,10 @@ html {
   line-height: $base-line-height; /* [1] */
   font-weight: 400;
   font-family: $font-body;
+  overflow: hidden;
   overflow-y: scroll; /* [2] */
   min-height: 100%; /* [3] */
-  background-color: $neutral-05;
+  background-color: $neutral-00;
   color: $neutral-60;
   text-align: center;
 }

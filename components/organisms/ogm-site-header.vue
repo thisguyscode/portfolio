@@ -58,7 +58,7 @@ $name-max-width: 292px;
 /* Base component class
    ====================================================================== */
 .ogm-site-header {
-  @include inner-border (bottom, 1px, low);
+  @include inner-border (bottom, 1px, high);
   z-index: 100;
   position: relative;
   background-color: $neutral-00;

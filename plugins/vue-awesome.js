@@ -17,6 +17,7 @@ import 'vue-awesome/icons/bell'
 import 'vue-awesome/icons/envelope'
 import 'vue-awesome/icons/gear'
 import 'vue-awesome/icons/search'
+import 'vue-awesome/icons/plus'
 import 'vue-awesome/icons/user-circle-o'
 import 'vue-awesome/icons/user-plus'
 

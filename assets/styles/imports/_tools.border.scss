@@ -17,7 +17,7 @@ $inner-border-color: $neutral-100;
   }
 
   @if $contrast == 'high' {
-    $alpha: 3;
+    $alpha: .3;
   }
   
   @if $sides == 'all' {

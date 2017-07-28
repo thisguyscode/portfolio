@@ -1,12 +1,7 @@
 <template>
-  <blockquote class="c__ c__--large">
-    <div class="c__inner">
-      <p class="c__text  u-text--bold">
-        I make digital interfaces for humans.
-      </p>
-      <p class="c__text  u-text--low-contrast">
-        It&#39;s mostly putting text in boxes.
-      </p>
+  <blockquote class="atm-blockquote">
+    <div class="__inner">
+      <slot></slot>
     </div>
   </blockquote>
 </template>
@@ -24,27 +19,14 @@ export default {
 $quote-width: 34px;
 $quote-height: 20px;
 
-.c__ {
+.atm-blockquote {
   @include inuit-clearfix;
   text-align: center;
   position: relative;
   display: block;
-
-  @include mq($from: tablet) {
-  }
-
 }
 
-.c__text {
-  @include vr($font-body, $font-size-lg);  
-  margin-bottom: $heading-trailer;
-
-  &:last-child {
-    margin-bottom: none;
-  }
-}
-
-.c__inner {
+.__inner {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -70,18 +52,6 @@ $quote-height: 20px;
     background-image: url('~assets/images/quote-double-end.svg');
     bottom: 0;
     right: 0;
-  }
-}
-
-.c__--large {
-  
-  @include mq($from: desktop) {
-    
-    > .c__text {
-      @include vr($font-body, $font-size-xl);
-      margin-bottom: $heading-trailer;
-    }
-
   }
 }
 

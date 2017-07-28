@@ -37,8 +37,9 @@ $z-index: (
 // Navbar
 $navbar-padding: $unit-md;
 $navbar-padding-mobile: $unit-md;
-
+// NOTE: $navbar-inner-height is NOT dynamic (changing it will not change actual inner height)
 $navbar-inner-height: $unit-md;
+$navbar-height: ($navbar-padding*2) + $navbar-inner-height;
 
 
 

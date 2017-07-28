@@ -1,30 +1,76 @@
 <template>
-  <div class="mlc-site-nav" :class="cssSiteNav">
-    <ul class="__nav-list">
-      <li class="__nav-item">
-        <nuxt-link class="__nav-link" to="/" v-scroll-to="'#content-top'">Projects</nuxt-link>
-      </li>
-      <li class="__nav-item">
-        <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">Profile</nuxt-link>
-      </li>
-      <li class="__nav-item">
-        <nuxt-link class="__nav-link" to="/contact" v-scroll-to="'#content-top'">Contact</nuxt-link>
-      </li>
-    </ul>
-  </div>
+  <span class="mlc-site-nav">
+    
+    <v-waypoint class="__waypoint" @waypoint="waypointNav"></v-waypoint>
+    
+    <nav class="__navbar" ref="jsNavbar" :class="cssNavbar">
+      <div class="u-wrapper">
+        <ul class="__nav-list">
+          <li class="__nav-item">
+            <nuxt-link class="__nav-link" to="/projects" v-scroll-to="'#content-top'">
+              Projects
+            </nuxt-link>
+          </li>
+          <li class="__nav-item">
+            <nuxt-link class="__nav-link" to="/profile" v-scroll-to="'#content-top'">
+              Profile
+            </nuxt-link>
+          </li>
+          <li class="__nav-item">
+            <nuxt-link class="__nav-link" to="/contact" v-scroll-to="'#content-top'">
+              Contact
+            </nuxt-link>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div ref="jsRelativePlaceholder" class="__relative-placeholder"></div>
+
+  </span>
 </template>
 
+
 <script>
+
 export default {
-  scrollToTop: false
+  data: () => {
+    return {
+      navFixed: false
+    }
+  },
+  computed: {
+    cssNavbar: function () {
+      return {
+        's-is-fixed': this.navFixed
+      }
+    }
+  },
+  methods: {
+    waypointNav (direction, going) {
+      var navBar = this.$refs.jsNavbar
+      var relativePlaceholder = this.$refs.jsRelativePlaceholder
+      var navHeight = navBar.clientHeight
+
+      if (going === 'in') {
+        this.navFixed = false
+        relativePlaceholder.removeAttribute('style')
+      } else if (going === 'out') {
+        relativePlaceholder.setAttribute('style',
+          'height: ' + navHeight + 'px; '
+        )
+        this.navFixed = true
+      }
+    }
+  }
 }
 </script>
 
+
 <style lang="scss" scoped>
+
 /* NOTE
-** There are various styles being added inline to the glasses as they are
-** scrolled past. These styles are removed once the element reaches the end
-** of the transition (in both directions).
+** None
 */
 
 /* Import project settings
@@ -35,20 +81,45 @@ export default {
 /* Local variables
    ====================================================================== */
 
-// NONE
+// None
 
 
 /* Base component class
    ====================================================================== */
-
 .mlc-site-nav {
-  
 }
 
-
-/* Nav list / links
+/* Navbar
    ====================================================================== */
 
+/**
+ * 1. Simoulanteously sets the placeholder bar and fixed-state bar as fixed
+ * 2. Only set the padding once header becomes fixed (prevents page jumping)
+ * 3. Position the bar at the top
+ */
+
+.__navbar {
+  transition: box-shadow .5s ease, background-color .5s ease;
+  width: 100%; /*[3]*/
+  top: 0; /*[3]*/
+  left: 0; /*[3]*/
+
+  &.s-is-fixed {
+    // line-height: $navbar-inner-height;
+    @include inner-border(bottom, 1px);
+    position: fixed; /*[1]*/
+    text-align: right;
+    background: white;
+    z-index: 10;
+    
+    @include mq($from: tablet) {
+      text-align: center;
+    }
+  }
+}
+
+/* Nav Links
+   ====================================================================== */
 /**
  * 1. Remove default left/bottom margin applied to <ul>
  * 2. Basic alignment and margins
@@ -61,35 +132,29 @@ export default {
   margin-left: 0; /*[1]*/
   margin-bottom: 0; /*[1]*/
 
-  &.s-is-fixed {
-    position: fixed;
-    top: $navbar-padding;
-    right: $navbar-padding;
-    text-align: right;
-  }
+  // &.s-is-fixed {
+  //   position: fixed;
+  //   top: $navbar-padding;
+  //   right: $navbar-padding;
+  // }
 }
 
 
 .__nav-item {
   display: inline-block; /*[2]*/
-  margin-right: $unit-md; /*[2]*/
-  
-  @include mq($from: desktop) {
-    margin-right: $unit-lg; /*[2]*/
-  }
-
-  &:last-of-type {
-    margin-right: 0; /*[2]*/
-  }
 }
 
 
 .__nav-link {
-
-  @include vr($font-body, $font-size-sm); /*[3]*/
+  text-decoration: none;
+  color: $neutral-60;
+  padding: $navbar-padding $navbar-padding/2;
+  font-size: $font-size-sm;
+  display: block;
 
   @include mq($from: desktop) {
-    @include vr($font-body, $font-size-md); /*[3]*/
+    padding: $navbar-padding;
+    font-size: $font-size-md;
   }
   
   &:before {
@@ -101,6 +166,11 @@ export default {
     height: .8em; /*[4]*/
     margin-right: $unit-xs; /*[4]*/
   }
-}
 
+  &.nuxt-link-active {
+    background: $neutral-05;
+    margin-bottom: 1px;
+    color: $neutral-100;
+  }
+}
 </style>

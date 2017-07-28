@@ -161,7 +161,7 @@ $glasses-max-width: 264px;
 }
 
 .__mock-navbar {
-  z-index: 20;
+  z-index: 40;
 }
 
 
@@ -181,7 +181,8 @@ $glasses-max-width: 264px;
  */
 
 .__glasses {
-  position: absolute; /*[1]*/  
+  position: absolute; /*[1]*/
+  z-index: 40;
   
   @at-root .__fixed-placeholder,
   &.s-is-fixed {
@@ -193,6 +194,7 @@ $glasses-max-width: 264px;
 .__glasses {
   &.s-is-fixed {
     top: $navbar-padding;
+    z-index: 40;
   }
 }
 

@@ -1,13 +1,17 @@
 <template>
   
-  <section id="page-top" class="u-wrapper">
+  <section id="page-top">
 
-    <div class="u-baseline-grid"></div>
+    <div class="u-wrapper">
+      <div class="u-baseline-grid"></div>
+    </div>
 
-    <ogm-site-header></ogm-site-header>
+    <ogm-site-header :contentReached="contentReached"></ogm-site-header>
     <ogm-temp-nav></ogm-temp-nav>
-
-    <v-waypoint id="content-top" @waypoint="waypointContentTop"></v-waypoint>
+    
+    <div class="__content-waypoint-wrapper">
+      <v-waypoint class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></v-waypoint>
+    </div>
 
     <nuxt/>
 
@@ -27,16 +31,31 @@ export default {
   },
   data: () => {
     return {
-      text: 'not-trigger-yet'
+      contentReached: false
     }
   },
   methods: {
     waypointContentTop (direction, going) {
-      this.text = 'the Waypoint has been triggered with: direction: { x: ' + direction.x + ', y: ' + direction.y + ' } and going: ' + going
+      if (going === 'out') {
+        this.contentReached = true
+      } else {
+        this.contentReached = false
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "~assets/styles/imports/imports";
+
+.__content-waypoint-wrapper {
+  position: relative;
+  height: 0;
+}
+.__content-waypoint {
+  position: absolute;
+  top: -$navbar-height;
+}
+
 </style>

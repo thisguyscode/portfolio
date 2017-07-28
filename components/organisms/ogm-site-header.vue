@@ -11,7 +11,7 @@
   <!-- tagline -->
   <h2 class="__tagline  u-text--low-contrast">digital interface designer</h2>
 
-  <mlc-site-nav></mlc-site-nav>
+  <mlc-site-nav :isStyled="contentReached"></mlc-site-nav>
 
 </div>
 
@@ -26,6 +26,12 @@ export default {
   components: {
     mlcSiteNav,
     mlcGlasses
+  },
+  props: {
+    contentReached: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>
@@ -46,13 +52,16 @@ export default {
 
 /* Local variables
    ====================================================================== */
-$glasses-max-width: 264px;
 $name-max-width: 292px;
 
 
 /* Base component class
    ====================================================================== */
 .ogm-site-header {
+  @include inner-border (bottom, 1px, low);
+  z-index: 100;
+  position: relative;
+  background-color: $neutral-00;
   text-align: center;
   padding: $unit-xxl $unit-md;
 
@@ -70,12 +79,13 @@ $name-max-width: 292px;
    ====================================================================== */
 .__name {
   width: $name-max-width/2;
+  min-height: $unit-xxl;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: $unit-md;
+  // margin-bottom: $unit-md;
 
   @include mq($from: desktop) {
-    margin-bottom: $unit-lg;
+    min-height: $unit-xxl*2;
     width: $name-max-width;
   }
 
@@ -86,7 +96,12 @@ $name-max-width: 292px;
    ====================================================================== */
 .__tagline {
   @include vr($font-display, $font-size-lg);
-  margin-bottom: $unit-lg;
+  margin-bottom: 0;
+
+  @include mq($from: desktop) {
+    @include vr($font-display, $font-size-xl);
+    margin-bottom: $unit-xl;
+  }
 }
 
 </style>

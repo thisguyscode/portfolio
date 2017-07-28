@@ -39,10 +39,17 @@ export default {
       navFixed: false
     }
   },
+  props: {
+    isStyled: {
+      type: Boolean,
+      default: false
+    }
+  },
   computed: {
     cssNavbar: function () {
       return {
-        's-is-fixed': this.navFixed
+        's-is-fixed': this.navFixed,
+        's-is-styled': this.isStyled
       }
     }
   },
@@ -87,6 +94,8 @@ export default {
 /* Base component class
    ====================================================================== */
 .mlc-site-nav {
+  position: relative;
+  z-index: 20;
 }
 
 /* Navbar
@@ -99,22 +108,23 @@ export default {
  */
 
 .__navbar {
-  transition: box-shadow .5s ease, background-color .5s ease;
+  // transition: background-color .1s ease-in-out;
   width: 100%; /*[3]*/
   top: 0; /*[3]*/
   left: 0; /*[3]*/
 
   &.s-is-fixed {
-    // line-height: $navbar-inner-height;
-    @include inner-border(bottom, 1px);
     position: fixed; /*[1]*/
     text-align: right;
-    background: white;
-    z-index: 10;
     
     @include mq($from: tablet) {
       text-align: center;
     }
+  }
+
+  &.s-is-styled {
+    @include inner-border(bottom, 1px, low);
+    background: white;
   }
 }
 
@@ -142,35 +152,71 @@ export default {
 
 .__nav-item {
   display: inline-block; /*[2]*/
+  @include mq($from: mobile, $until: desktop) {
+    &:last-of-type {
+      margin-right: $navbar-padding/2;
+    }
+  }
 }
 
 
 .__nav-link {
+  @include vr($font-body, $font-size-sm);
+  @include vr-reset;
   text-decoration: none;
   color: $neutral-60;
   padding: $navbar-padding $navbar-padding/2;
-  font-size: $font-size-sm;
   display: block;
+  position: relative;
 
   @include mq($from: desktop) {
+    @include vr($font-body, $font-size-md);
+    @include vr-reset;
     padding: $navbar-padding;
-    font-size: $font-size-md;
+    position: relative;
   }
-  
+
   &:before {
     content: '';
     position: relative; /*[4]*/
     display: inline-block; /*[4]*/
-    background-color: red; /*[4]*/
+    background-color: $neutral-100; /*[4]*/
     width: .8em; /*[4]*/
     height: .8em; /*[4]*/
     margin-right: $unit-xs; /*[4]*/
   }
 
-  &.nuxt-link-active {
-    background: $neutral-05;
-    margin-bottom: 1px;
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    // left: 0;
+    bottom: 0;
+    transition: width .2s ease;
+    transform: translateX(-50%);
+    left: 50%;
+  }
+
+  &:hover {
     color: $neutral-100;
+    &:after {
+      width: 100%;
+      background-color: $neutral-100;
+    }
+  }
+
+  &.nuxt-link-active {
+    color: $red;
+
+    &:before {
+      background-color: $red; /*[4]*/
+    }
+
+    &:after {
+      width: 100%;
+      background-color: $red;
+    }
   }
 }
 </style>

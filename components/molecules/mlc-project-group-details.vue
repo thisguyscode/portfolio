@@ -117,7 +117,6 @@ export default {
 
       if (going === 'out' && direction.y === 'down') {
         header.setAttribute('style',
-          'transition: transform .2s ease; ' +
           'transform: translateY(' + -headerHeight + 'px);'
         )
       } else if (going === 'in' && direction.y === 'up') {

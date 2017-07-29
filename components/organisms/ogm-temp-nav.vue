@@ -32,7 +32,7 @@
   bottom: $unit-sm;
   left: $unit-sm;
   list-style: none;
-  z-index: 100;
+  z-index: z("trump");
 }
 
  .c__nav-item {

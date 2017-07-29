@@ -8,7 +8,14 @@
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
         <div class="__header" ref="jsHeader">
-          <h3 class="__name">{{ name }}</h3>
+          
+          <div class="__name-mock-bar" :class="cssNameMockBar">
+            <div class="u-wrapper">
+              <h3 class="__name">{{ name }}</h3>
+            </div>
+          </div>
+
+          <div class="__name-relative-placeholder" :class="cssNameRelativePlaceholder"></div>
           
           <div class="__logo-wrapper  __logo-wrapper--landscape">
             <img class="__logo" :src="logoSrc">
@@ -31,14 +38,14 @@
       {{ descriptionMain }}
     </p>
     
-    <span @click="toggleDescription" class="__description-trigger">
-      <p v-if="!showDescription">Show more</p>
-      <p v-if="showDescription">Hide</p>
-    </span>
-
     <p class="__description-sub" :class="cssDescriptionSub">
       {{ descriptionSub }}
     </p>
+
+    <span @click="toggleDescription">
+      <p class="__description-trigger" v-if="!showDescription">Show more</p>
+      <p class="__description-trigger" v-if="showDescription">Hide</p>
+    </span>
     
     <v-waypoint position="bottom" class="__waypoint" @waypoint="this.waypointHeaderBottom"></v-waypoint>
 
@@ -62,6 +69,16 @@ export default {
     cssHeaderMockBar: function () {
       return {
         's-is-fixed': this.headerIsFixed
+      }
+    },
+    cssNameMockBar: function () {
+      return {
+        's-is-fixed': this.headerIsFixed
+      }
+    },
+    cssNameRelativePlaceholder: function () {
+      return {
+        's-is-set': this.headerIsFixed
       }
     }
   },
@@ -157,26 +174,63 @@ export default {
    ====================================================================== */
 
 .__header-mock-bar {
+  z-index: z("project-group-header", "relative");
   &.s-is-fixed {
-    width: 100%;
-    z-index: 10;
-    padding-left: $unit-md;
-    padding-right: $unit-md;
-    position: fixed;
-    top: $navbar-height;
-    left: 0;
+    @include mq($from: desktop) {
+      width: 100%;
+      z-index: z("project-group-header", "fixed");
+      padding-left: $unit-md;
+      padding-right: $unit-md;
+      position: fixed;
+      top: $navbar-height;
+      left: 0;
+    }
 
     .__header {
       
       // @include inner-border(bottom, 1px, low);
       background: white;
       // display: inline-block;
-      
       @include mq($from: desktop) {
         width: 33.3333%;
         padding-right: $unit-xxl;
       }
     }
+  }
+}
+
+.__name-mock-bar {
+  z-index: z("project-group-header", "relative");
+  &.s-is-fixed {
+    @include mq($from: mobile, $until: desktop) {
+      width: 100%;
+      background: $neutral-00;
+      z-index: z("project-group-header", "fixed");
+      padding: $unit-md;
+      padding-bottom: 0;
+      position: fixed;
+      top: $navbar-height;
+      left: 0;
+          .__name {
+          padding-bottom:  0;
+        }
+    }
+
+
+  }
+}
+
+.__name-relative-placeholder {
+  &.s-is-set {
+    @include mq($from: mobile, $until: desktop) {
+      height: $unit-lg;
+    }
+  }
+}
+
+.__header-relative-placeholder {
+  @include mq($from: mobile, $until: desktop) {
+    display: none;
   }
 }
 
@@ -240,10 +294,12 @@ export default {
 }
 
 .__divider {
-  height: 1px;
-  background-color: $neutral-10;
-  width: 100%;
-  margin-top: -1px;
+  @include mq($from: desktop) {
+    height: 1px;
+    background-color: $neutral-10;
+    width: 100%;
+    margin-top: -1px;
+  }
 }
 
 .__description-main {
@@ -252,7 +308,9 @@ export default {
 }
 
 .__description-trigger {
+  z-index: z("clickable-content");
   display: block;
+  padding-bottom: 0;
   @include mq($from: desktop) {
     display: none;
   }

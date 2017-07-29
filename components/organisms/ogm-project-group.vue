@@ -90,7 +90,7 @@ export default {
   flex-basis: 33.3333%;
   @include mq($from: desktop) {
     padding-right: $unit-xxl;
-    min-width: 300px;
+    // min-width: 300px;
   }
 }
 

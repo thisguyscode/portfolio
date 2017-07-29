@@ -2,7 +2,9 @@
   <div class="mlc-project-overview">
     
     <!-- WAYPOINT -->
-    <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+    <div class="__waypoint-wrapper">
+      <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+    </div>
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
@@ -34,8 +36,11 @@
     <div class="__header-relative-placeholder" ref="jsHeaderRelativePlaceholder"></div>
 
     <img class="__image" :src="project.imgSrc"/>
+    
+    <div class="__waypoint-wrapper">
+      <v-waypoint class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+    </div>
 
-    <v-waypoint class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
   </div>
 </template>
 
@@ -116,10 +121,13 @@ $header-height: $header-padding-y*2 + $header-text-height;
 /* Base component class
    ====================================================================== */
 .mlc-project-overview {
+  z-index: z("project-header", "relative");
   position: relative;
-  z-index: 18;
   margin-bottom: $unit-xl;
-  padding-top: $unit-xl;
+  padding-top: 0;
+  @include mq($from: desktop) {
+    padding-top: $unit-xl;
+  }
 }
 
 /* --
@@ -128,7 +136,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 .__header-mock-bar {
   &.s-is-fixed {
     width: 100%;
-    z-index: 10;
+    z-index: z("project-group-header", "fixed");
     padding-left: $unit-md;
     padding-right: $unit-md;
     position: fixed;
@@ -159,16 +167,24 @@ $header-height: $header-padding-y*2 + $header-text-height;
   display: flex;
   // margin-bottom: $unit-lg;
   background: white;
+
+  @include mq($from: mobile, $until: desktop) {
+    padding-top: $unit-xxl;
+  }
+}
+.__waypoint-wrapper {
+  position: relative;
 }
 
 .__waypoint {
-  margin-top: -$navbar-height;
-  margin-bottom: $navbar-height;
+  position: absolute;
+  top: -$navbar-height;
 }
 
 .__waypoint-bottom {
-  margin-top: -($navbar-height + $header-height);
-  margin-bottom: ($navbar-height + $header-height);
+  position: absolute;
+  top: -($navbar-height + $header-height);
+  // bottom: ($navbar-height + $header-height);
 } 
 
 .__header--data-dashboard {

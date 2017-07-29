@@ -59,7 +59,7 @@ $name-max-width: 292px;
    ====================================================================== */
 .ogm-site-header {
   @include inner-border (bottom, 1px, high);
-  z-index: 100;
+  z-index: z("site-header", "base");
   position: relative;
   background-color: $neutral-00;
   text-align: center;

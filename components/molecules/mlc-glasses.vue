@@ -144,6 +144,7 @@ $glasses-max-width: 264px;
  */
 
 .__mock-navbar {
+  z-index: z("site-header", "glasses");
   @at-root .__mock-navbar-placeholder,
   &.s-is-fixed {
     width: 100%;
@@ -157,11 +158,10 @@ $glasses-max-width: 264px;
 
 .__mock-navbar-placeholder {
   padding: $navbar-padding;
-  z-index: -1;
 }
 
 .__mock-navbar {
-  z-index: 40;
+  // z-index: z("mock-navbar");
 }
 
 
@@ -181,8 +181,8 @@ $glasses-max-width: 264px;
  */
 
 .__glasses {
+  z-index: z("site-header", "glasses");
   position: absolute; /*[1]*/
-  z-index: 40;
   
   @at-root .__fixed-placeholder,
   &.s-is-fixed {
@@ -194,12 +194,10 @@ $glasses-max-width: 264px;
 .__glasses {
   &.s-is-fixed {
     top: $navbar-padding;
-    z-index: 40;
   }
 }
 
 .__fixed-placeholder {
-  z-index: -1;
 }
 
 .__glasses,

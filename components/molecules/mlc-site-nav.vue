@@ -94,8 +94,8 @@ export default {
 /* Base component class
    ====================================================================== */
 .mlc-site-nav {
+  z-index: z("site-header", "links");
   position: relative;
-  z-index: 20;
 }
 
 /* Navbar
@@ -108,6 +108,7 @@ export default {
  */
 
 .__navbar {
+  z-index: z("site-header", "links");
   // transition: background-color .1s ease-in-out;
   width: 100%; /*[3]*/
   top: 0; /*[3]*/

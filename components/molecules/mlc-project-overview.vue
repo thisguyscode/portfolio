@@ -17,11 +17,11 @@
           <div class="__header__cell">
             <h3 class="__header__title">{{ project.name }}</h3>
           </div>
-          <div class="__header__cell">
+          <div class="__header__cell  u-hide-mobile-tablet">
             <p class="__header__label">Role</p>
             <h4 class="__header__role">{{ project.role }}</h4>
           </div>
-          <div class="__header__cell">
+          <div class="__header__cell  u-hide-mobile-tablet">
             <p class="__header__label">Date</p>
             <h4 class="__header__date">{{ project.date }}</h4>
           </div>
@@ -131,7 +131,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
   margin-bottom: $unit-xl;
   padding-top: 0;
   @include mq($from: desktop) {
-    padding-top: $unit-xl;
+    padding-top: 0;
   }
 }
 
@@ -193,13 +193,13 @@ $header-height: $header-padding-y*2 + $header-text-height;
 } 
 
 .__header--data-dashboard {
-  box-shadow: inset 0 -1px 0 0 $green;
+  box-shadow: inset 0 -1px 0 0 $blue;
 
   .__header__index {
-    color: $green;
+    color: $blue;
   }
   .__header__label {
-    color: $green;
+    color: $blue;
   }
 }
 
@@ -212,13 +212,14 @@ $header-height: $header-padding-y*2 + $header-text-height;
 }
 
 .__header__index {
+  font-weight: 600;
   @include vr($font-body, $font-size-xxxl);
 }
 
 .__header__title {
   @include vr($font-body, $font-size-md);
   font-weight: 600;
-  color: $neutral-100;
+  color: $blue;
   max-width: 220px;
 }
 
@@ -231,7 +232,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
   position: relative;
   text-align: center;
   display: inline-block;
-  background-color: $green;
+  background-color: $blue;
   border-radius: 100%;
   width: $unit-lg;
   height: $unit-lg;

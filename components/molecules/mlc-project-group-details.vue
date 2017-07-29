@@ -300,7 +300,7 @@ export default {
 .__divider {
   @include mq($from: desktop) {
     height: 1px;
-    background-color: $neutral-10;
+    background-color: $neutral-30;
     width: 100%;
     margin-top: -1px;
   }

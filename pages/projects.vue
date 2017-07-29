@@ -37,23 +37,23 @@ export default {
           descriptionSub: 'They have managed to secure massive clients due to their dedication to what they call ‘Data Intelligence’ - using data effectively to glean valuable and actionable insights on a large scale. They are working on a web platform which covers the entire data pipeline, from collection to visualization. I was largely tasked with producing realistic product mockups for said platform for the corporate website, but also had a chance to work on their ‘Visualize’ product',
           projects: [
             {
-              name: 'A data dashboard for national insights',
+              name: 'Project name goes here on 2 lines',
               linkTo: '/socialcops/data-dashboard',
               color: 'red',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/data-dashboard.jpg')
+              imgSrc: require('~assets/images/topography.svg')
             },
             {
               name: 'Product mockups / screenshots',
-              date: 'xxx',
-              role: 'xxx',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
               imgSrc: require('~assets/images/color-generator.jpg')
             },
             {
               name: 'SCSS-based color palette generator',
-              date: 'xxx',
-              role: 'xxx',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
               imgSrc: require('~assets/images/topography.svg')
             }
           ]
@@ -66,23 +66,23 @@ export default {
           descriptionSub: 'They have managed to secure massive clients due to their dedication to what they call ‘Data Intelligence’ - using data effectively to glean valuable and actionable insights on a large scale. They are working on a web platform which covers the entire data pipeline, from collection to visualization. I was largely tasked with producing realistic product mockups for said platform for the corporate website, but also had a chance to work on their ‘Visualize’ product',
           projects: [
             {
-              name: 'A data dashboard for national insights',
+              name: 'Project name goes here on 2 lines',
               linkTo: '/socialcops/data-dashboard',
               color: 'red',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/data-dashboard.jpg')
+              imgSrc: require('~assets/images/topography.svg')
             },
             {
               name: 'Product mockups / screenshots',
-              date: 'xxx',
-              role: 'xxx',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
               imgSrc: require('~assets/images/color-generator.jpg')
             },
             {
               name: 'SCSS-based color palette generator',
-              date: 'xxx',
-              role: 'xxx',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
               imgSrc: require('~assets/images/topography.svg')
             }
           ]

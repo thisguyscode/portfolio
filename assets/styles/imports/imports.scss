@@ -1,6 +1,6 @@
 @import "../../../node_modules/inuitcss/settings/settings.core";
 @import "./settings.config";
-$show-baseline: true; // Doesn't work in IE and Edge
+$show-baseline: false; // Doesn't work in IE and Edge
 @import "./settings.typography";
 @import "./settings.main";
 

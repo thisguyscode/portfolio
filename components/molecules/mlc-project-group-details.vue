@@ -3,7 +3,7 @@
     
     
     <!-- WAYPOINT -->
-    <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+    <v-waypoint v-if="clientRender" class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
     <!-- HEADER  -->
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
@@ -47,7 +47,7 @@
       <p class="__description-trigger" v-if="showDescription">Hide</p>
     </span>
     
-    <v-waypoint position="bottom" class="__waypoint" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+    <v-waypoint v-if="clientRender" position="bottom" class="__waypoint" @waypoint="this.waypointHeaderBottom"></v-waypoint>
 
   </section>
 </template>
@@ -57,7 +57,8 @@ export default {
   data: () => {
     return {
       showDescription: false,
-      headerIsFixed: false
+      headerIsFixed: false,
+      clientRender: false
     }
   },
   computed: {
@@ -103,6 +104,9 @@ export default {
       type: String,
       required: true
     }
+  },
+  mounted () {
+    this.clientRender = true
   },
   methods: {
     toggleDescription () {

@@ -1,7 +1,7 @@
 <template>
   <span class="mlc-site-nav">
     
-    <v-waypoint class="__waypoint" @waypoint="waypointNav"></v-waypoint>
+    <v-waypoint v-if="clientRender" class="__waypoint" @waypoint="waypointNav"></v-waypoint>
     
     <nav class="__navbar" ref="jsNavbar" :class="cssNavbar">
       <div class="u-wrapper">
@@ -36,7 +36,8 @@
 export default {
   data: () => {
     return {
-      navFixed: false
+      navFixed: false,
+      clientRender: false
     }
   },
   props: {
@@ -52,6 +53,9 @@ export default {
         's-is-styled': this.isStyled
       }
     }
+  },
+  mounted () {
+    this.clientRender = true
   },
   methods: {
     waypointNav (direction, going) {

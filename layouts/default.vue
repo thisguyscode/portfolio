@@ -10,7 +10,7 @@
     <ogm-temp-nav></ogm-temp-nav>
     
     <div class="__content-waypoint-wrapper">
-      <v-waypoint class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></v-waypoint>
+      <v-waypoint v-if="clientRender" class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></v-waypoint>
     </div>
 
     <nuxt/>
@@ -31,8 +31,12 @@ export default {
   },
   data: () => {
     return {
-      contentReached: false
+      contentReached: false,
+      clientRender: false
     }
+  },
+  mounted () {
+    this.clientRender = true
   },
   methods: {
     waypointContentTop (direction, going) {

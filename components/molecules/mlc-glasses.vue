@@ -9,7 +9,7 @@
     </div>
 
     <!-- WAYPOINT / GLASSES -->
-    <v-waypoint class="__waypoint" @waypoint="waypointGlasses"></v-waypoint>
+    <v-waypoint v-if="clientRender" class="__waypoint" @waypoint="waypointGlasses"></v-waypoint>
     <div class="__mock-navbar" :class="cssGlassesMockNavbar">
       <div class="u-wrapper">
         <div ref="jsGlasses" class="__glasses" :class="cssGlasses">
@@ -31,7 +31,8 @@
 export default {
   data: () => {
     return {
-      fixed: false
+      fixed: false,
+      clientRender: false
     }
   },
   computed: {
@@ -47,6 +48,7 @@ export default {
     }
   },
   mounted () {
+    this.clientRender = true
     this.setGlasses()
   },
   methods: {

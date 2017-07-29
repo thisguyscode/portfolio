@@ -3,7 +3,7 @@
     
     <!-- WAYPOINT -->
     <div class="__waypoint-wrapper">
-      <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+      <v-waypoint v-if="clientRender" class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
     </div>
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
@@ -38,7 +38,7 @@
     <img class="__image" :src="project.imgSrc"/>
     
     <div class="__waypoint-wrapper">
-      <v-waypoint class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+      <v-waypoint v-if="clientRender" class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
     </div>
 
   </div>
@@ -48,7 +48,8 @@
 export default {
   data: () => {
     return {
-      headerIsFixed: false
+      headerIsFixed: false,
+      clientRender: false
     }
   },
   computed: {
@@ -67,6 +68,9 @@ export default {
       type: Number,
       required: true
     }
+  },
+  mounted () {
+    this.clientRender = true
   },
   methods: {
     waypointHeaderTop (direction, going) {

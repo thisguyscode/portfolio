@@ -41,6 +41,7 @@ module.exports = {
   loading: { color: '#3B8070' },
   plugins: [
     '~plugins/vue-scrollto.js',
+    '~plugins/no-ssr.js',
     {
       src: '~plugins/webfontloader.config.js',
       ssr: false

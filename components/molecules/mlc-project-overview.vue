@@ -3,7 +3,9 @@
     
     <!-- WAYPOINT -->
     <div class="__waypoint-wrapper">
-      <v-waypoint v-if="clientRender" class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+      <atm-no-ssr>
+        <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
+      </atm-no-ssr>
     </div>
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
@@ -25,7 +27,9 @@
           </div>
           <div class="__header__cell  __header__button-wrapper">
             <nuxt-link to="/" class="__header__button">
-              <icon class="__header__button__icon" name="plus"></icon>
+              <atm-no-ssr>
+                <icon class="__header__button__icon" name="plus"></icon>
+              </atm-no-ssr>
             </nuxt-link>
           </div>
         </div>
@@ -38,7 +42,9 @@
     <img class="__image" :src="project.imgSrc"/>
     
     <div class="__waypoint-wrapper">
-      <v-waypoint v-if="clientRender" class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+      <atm-no-ssr>
+        <v-waypoint class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+      </atm-no-ssr>
     </div>
 
   </div>
@@ -48,8 +54,7 @@
 export default {
   data: () => {
     return {
-      headerIsFixed: false,
-      clientRender: false
+      headerIsFixed: false
     }
   },
   computed: {
@@ -69,15 +74,11 @@ export default {
       required: true
     }
   },
-  mounted () {
-    this.clientRender = true
-  },
   methods: {
     waypointHeaderTop (direction, going) {
       var header = this.$refs.jsHeader
       var relativePlaceholder = this.$refs.jsHeaderRelativePlaceholder
       var headerHeight = header.clientHeight
-
       if (going === 'in' && direction.y === 'up') {
         this.headerIsFixed = false
         relativePlaceholder.removeAttribute('style')

@@ -1,9 +1,9 @@
 <template>
   <span class="mlc-site-nav">
     
-    <atm-no-ssr>
+    <!-- <atm-no-ssr>
       <v-waypoint class="__waypoint" @waypoint="waypointNav"></v-waypoint>
-    </atm-no-ssr>
+    </atm-no-ssr> -->
     
     <nav class="__navbar" ref="jsNavbar" :class="cssNavbar">
       <div class="u-wrapper">
@@ -37,7 +37,8 @@
 export default {
   data: () => {
     return {
-      navFixed: true
+      scrollPosition: null,
+      navFixed: false
     }
   },
   props: {
@@ -55,26 +56,45 @@ export default {
     }
   },
   mounted () {
-    // this.clientRender = true
+    window.addEventListener('scroll', this.windowScrolled)
+    window.addEventListener('resize', this.windowResized)
+  },
+  destroy () {
+    window.removeEventListener('scroll', this.windowScrolled)
+    window.removeEventListener('resize', this.windowResized)
   },
   methods: {
-    waypointNav (direction, going) {
-      var navBar = this.$refs.jsNavbar
-      var relativePlaceholder = this.$refs.jsRelativePlaceholder
-      var navHeight = navBar.clientHeight
+    windowScrolled () {
+      this.scrollPosition = window.scrollY
+      this.updateNav()
+    },
+    windowResized () {
+    },
+    updateNav () {
+      var navbar = this.$refs.jsNavbar
+      var navTop = navbar.offsetTop
+      var navHeight = navbar.clientHeight
+      var relPlaceholder = this.$refs.jsRelativePlaceholder
+      var placeholderTop = relPlaceholder.offsetTop
 
-      if (going === 'in') {
-        this.navFixed = false
-        relativePlaceholder.removeAttribute('style')
-      } else if (going === 'out') {
-        relativePlaceholder.setAttribute('style',
-          'height: ' + navHeight + 'px; '
-        )
-        this.navFixed = true
+      if (this.navFixed === false) {
+        if (this.scrollPosition >= (navTop)) {
+          this.navFixed = true
+          relPlaceholder.style.height = navHeight + ''
+        } else {
+          this.navFixed = false
+          relPlaceholder.removeAttribute('style')
+        }
+      } else if (this.navFixed === true) {
+        if (this.scrollPosition <= (placeholderTop)) {
+          this.navFixed = false
+          relPlaceholder.removeAttribute('style')
+        }
       }
     }
   }
 }
+
 </script>
 
 

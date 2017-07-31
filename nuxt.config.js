@@ -43,6 +43,10 @@ module.exports = {
     '~plugins/vue-scrollto.js',
     '~plugins/no-ssr.js',
     {
+      src: '~plugins/global-events.js',
+      ssr: false
+    },
+    {
       src: '~plugins/webfontloader.config.js',
       ssr: false
     },

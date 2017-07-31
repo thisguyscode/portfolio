@@ -1,10 +1,6 @@
 <template>
   <span class="mlc-site-nav">
-    
-    <!-- <atm-no-ssr>
-      <v-waypoint class="__waypoint" @waypoint="waypointNav"></v-waypoint>
-    </atm-no-ssr> -->
-    
+
     <nav class="__navbar" ref="jsNavbar" :class="cssNavbar">
       <div class="u-wrapper">
         <ul class="__nav-list">
@@ -34,10 +30,10 @@
 
 
 <script>
+
 export default {
   data: () => {
     return {
-      scrollPosition: null,
       navFixed: false
     }
   },
@@ -55,22 +51,14 @@ export default {
       }
     }
   },
-  mounted () {
-    window.addEventListener('scroll', this.windowScrolled)
-    window.addEventListener('resize', this.windowResized)
-  },
-  destroy () {
-    window.removeEventListener('scroll', this.windowScrolled)
-    window.removeEventListener('resize', this.windowResized)
+  mounted: function () {
+    this.$bus.$on('isScrolling', () => {
+      this.updateNav()
+    })
   },
   methods: {
-    windowScrolled () {
-      this.scrollPosition = window.scrollY
-      this.updateNav()
-    },
-    windowResized () {
-    },
     updateNav () {
+      var scrollPosition = this.$store.state.scrollPosition
       var navbar = this.$refs.jsNavbar
       var navTop = navbar.offsetTop
       var navHeight = navbar.clientHeight
@@ -78,18 +66,20 @@ export default {
       var placeholderTop = relPlaceholder.offsetTop
 
       if (this.navFixed === false) {
-        if (this.scrollPosition >= (navTop)) {
+        if (scrollPosition >= (navTop)) {
           this.navFixed = true
-          relPlaceholder.style.height = navHeight + ''
+          relPlaceholder.style.height = navHeight + 'px'
         } else {
           this.navFixed = false
           relPlaceholder.removeAttribute('style')
         }
       } else if (this.navFixed === true) {
-        if (this.scrollPosition <= (placeholderTop)) {
+        if (scrollPosition <= (placeholderTop)) {
           this.navFixed = false
           relPlaceholder.removeAttribute('style')
         }
+      } else {
+        console.log('do nothing')
       }
     }
   }

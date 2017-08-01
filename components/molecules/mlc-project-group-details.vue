@@ -3,9 +3,11 @@
     
     
     <!-- WAYPOINT -->
-    <atm-no-ssr> 
-      <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
-    </atm-no-ssr>
+    <div class="__waypoint" ref="jsWaypointTop">
+      <atm-no-ssr> 
+        <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint>
+      </atm-no-ssr>
+    </div>
     <!-- HEADER  -->
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
@@ -49,9 +51,11 @@
       <p class="__description-trigger" v-if="showDescription">Hide</p>
     </span>
 
-    <atm-no-ssr> 
-      <v-waypoint position="bottom" class="__waypoint" @waypoint="this.waypointHeaderBottom"></v-waypoint>
-    </atm-no-ssr>
+    <div class="__waypoint"  ref="jsWaypointBottom">
+      <atm-no-ssr> 
+        <v-waypoint position="bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
+      </atm-no-ssr>
+    </div>
 
   </section>
 </template>
@@ -84,6 +88,27 @@ export default {
       return {
         's-is-set': this.headerIsFixed
       }
+    },
+    scrollPosition () {
+      return this.$store.state.scrollPosition
+    },
+    header () {
+      return this.$refs.jsHeader
+    },
+    headerHeight () {
+      return this.header.clientHeight
+    },
+    navHeight () {
+      return this.$store.state.navHeight
+    },
+    placeholder () {
+      return this.$refs.jsHeaderRelativePlaceholder
+    },
+    waypointTop () {
+      return this.$refs.jsWaypointTop.getBoundingClientRect().top + window.scrollY
+    },
+    waypointBottom () {
+      return this.$refs.jsWaypointBottom.getBoundingClientRect().top + window.scrollY
     }
   },
   props: {
@@ -108,6 +133,12 @@ export default {
       required: true
     }
   },
+  mounted () {
+    this.setHeader()
+    this.$bus.$on('isResizing', () => {
+      this.setHeader()
+    })
+  },
   methods: {
     toggleDescription () {
       if (this.showDescription === false) {
@@ -116,32 +147,44 @@ export default {
         this.showDescription = false
       }
     },
+    fixHeader () {
+      this.headerIsFixed = true
+      this.placeholder.style.height = this.headerHeight + 'px'
+    },
+    unfixHeader () {
+      this.headerIsFixed = false
+      this.placeholder.style.height = 0
+    },
+    hideHeader () {
+      this.header.style.top = -(this.headerHeight) + 'px'
+    },
+    unhideHeader () {
+      this.header.style.top = 0
+    },
+    setHeader () {
+      if (this.scrollPosition >= (this.waypointTop)) {
+        this.fixHeader()
+      } else {
+        this.unfixHeader()
+      }
+      if (this.scrollPosition >= (this.waypointBottom)) {
+        this.hideHeader()
+      } else {
+        this.unhideHeader()
+      }
+    },
     waypointHeaderTop (direction, going) {
-      var header = this.$refs.jsHeader
-      var relativePlaceholder = this.$refs.jsHeaderRelativePlaceholder
-      var headerHeight = header.clientHeight
-
       if (going === 'in' && direction.y === 'up') {
-        this.headerIsFixed = false
-        relativePlaceholder.removeAttribute('style')
+        this.unfixHeader()
       } else if (going === 'out' && direction.y === 'down') {
-        relativePlaceholder.setAttribute('style',
-          'height: ' + headerHeight + 'px; '
-        )
-        this.headerIsFixed = true
+        this.fixHeader()
       }
     },
     waypointHeaderBottom (direction, going) {
-      var header = this.$refs.jsHeader
-      // var relativePlaceholder = this.$refs.jsHeaderRelativePlaceholder
-      var headerHeight = header.clientHeight
-
       if (going === 'out' && direction.y === 'down') {
-        header.setAttribute('style',
-          'transform: translateY(' + -headerHeight + 'px);'
-        )
+        this.hideHeader()
       } else if (going === 'in' && direction.y === 'up') {
-        header.removeAttribute('style')
+        this.unhideHeader()
       }
     }
   }
@@ -178,11 +221,11 @@ export default {
    ====================================================================== */
 
 .__header-mock-bar {
-  z-index: z("project-group-header", "relative");
+  z-index: z("fixed", "mid");
   &.s-is-fixed {
     @include mq($from: desktop) {
       width: 100%;
-      z-index: z("project-group-header", "fixed");
+      z-index: z("fixed", "low");
       padding-left: $unit-md;
       padding-right: $unit-md;
       position: fixed;
@@ -191,7 +234,7 @@ export default {
     }
 
     .__header {
-      
+      position: absolute;
       // @include inner-border(bottom, 1px, low);
       background: white;
       // display: inline-block;
@@ -204,12 +247,12 @@ export default {
 }
 
 .__name-mock-bar {
-  z-index: z("project-group-header", "relative");
+  z-index: z("fixed", "low");
   &.s-is-fixed {
     @include mq($from: mobile, $until: desktop) {
       width: 100%;
       background: $neutral-00;
-      z-index: z("project-group-header", "fixed");
+      z-index: z("fixed", "highest");
       padding: $unit-md;
       padding-bottom: 0;
       position: fixed;
@@ -239,7 +282,7 @@ export default {
 }
 
 .__header {
-  transition: transform .2s ease;
+  transition: top .2s ease;
   padding-top: $unit-md;
 
   @include mq($from: desktop) {

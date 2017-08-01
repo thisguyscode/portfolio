@@ -25,19 +25,26 @@ $mq-breakpoints: (
 // Z-indexes
 $z-layers: (
   "trump":           9001,
+  "fixed": (
+    "highest": 700,
+    "high": 650,
+    "mid": 500,
+    "low": 450,
+    "lowest": 400 
+  ),
   "site-header": (
     "base": 1000,
-    "glasses": 500,
-    "links": 400
+    "glasses": 900,
+    "links": 800
   ),
   "primary-nav":      300,
-  "project-group-header": (
+  "project-header": (
     "relative":       200,
     "fixed":          180
   ),
-  "project-header": (
+  "project-group-header": (
     "relative":       140,
-    "fixed":          100
+    "fixed":          120
   ),
   "clickable-content": 90,
   "bottomless-pit": -9000

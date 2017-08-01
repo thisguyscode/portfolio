@@ -27,6 +27,11 @@ export default function ({store}) {
       EventBus.$emit('isScrolling')
       requestTick()
     }
+    function onResize () {
+      store.commit('updateWindowWidth')
+      EventBus.$emit('isResizing')
+      requestTick()
+    }
     function requestTick () {
       if (!ticking) {
         requestAnimationFrame(resetTick)
@@ -35,5 +40,6 @@ export default function ({store}) {
     }
 
     window.addEventListener('scroll', onScroll, false)
+    window.addEventListener('resize', onResize, false)
   })
 }

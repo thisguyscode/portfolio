@@ -3,9 +3,11 @@
     
     <!-- WAYPOINT -->
     <div class="__waypoint-wrapper">
-      <atm-no-ssr>
-        <v-waypoint class="__waypoint" @waypoint="this.waypointHeaderTop"></v-waypoint>
-      </atm-no-ssr>
+      <div class="__waypoint" ref="jsWaypointTop">
+        <atm-no-ssr>
+          <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint>
+        </atm-no-ssr>
+      </div>
     </div>
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
@@ -42,9 +44,11 @@
     <img class="__image" :src="project.imgSrc"/>
     
     <div class="__waypoint-wrapper">
-      <atm-no-ssr>
-        <v-waypoint class="__waypoint  __waypoint-bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
-      </atm-no-ssr>
+      <div class="__waypoint __waypoint-bottom" ref="jsWaypointBottom">
+        <atm-no-ssr>
+          <v-waypoint @waypoint="this.waypointHeaderBottom"></v-waypoint>
+        </atm-no-ssr>
+      </div>
     </div>
 
   </div>
@@ -57,13 +61,6 @@ export default {
       headerIsFixed: false
     }
   },
-  computed: {
-    cssHeaderMockBar: function () {
-      return {
-        's-is-fixed': this.headerIsFixed
-      }
-    }
-  },
   props: {
     project: {
       type: Object,
@@ -74,32 +71,79 @@ export default {
       required: true
     }
   },
+  computed: {
+    cssHeaderMockBar: function () {
+      return {
+        's-is-fixed': this.headerIsFixed
+      }
+    },
+    scrollPosition () {
+      return this.$store.state.scrollPosition
+    },
+    header () {
+      return this.$refs.jsHeader
+    },
+    headerHeight () {
+      return this.header.clientHeight
+    },
+    navHeight () {
+      return this.$store.state.navHeight
+    },
+    placeholder () {
+      return this.$refs.jsHeaderRelativePlaceholder
+    },
+    waypointTop () {
+      return this.$refs.jsWaypointTop.getBoundingClientRect().top + window.scrollY
+    },
+    waypointBottom () {
+      return this.$refs.jsWaypointBottom.getBoundingClientRect().top + window.scrollY
+    }
+  },
+  mounted () {
+    this.setHeader()
+    this.$bus.$on('isResizing', () => {
+      this.setHeader()
+    })
+  },
   methods: {
+    fixHeader () {
+      this.headerIsFixed = true
+      this.placeholder.style.height = this.headerHeight + 'px'
+    },
+    unfixHeader () {
+      this.headerIsFixed = false
+      this.placeholder.style.height = 0
+    },
+    hideHeader () {
+      this.header.style.top = -(this.headerHeight) + 'px'
+    },
+    unhideHeader () {
+      this.header.style.top = 0
+    },
+    setHeader () {
+      if (this.scrollPosition >= (this.waypointTop)) {
+        this.fixHeader()
+      } else {
+        this.unfixHeader()
+      }
+      if (this.scrollPosition >= (this.waypointBottom)) {
+        this.hideHeader()
+      } else {
+        this.unhideHeader()
+      }
+    },
     waypointHeaderTop (direction, going) {
-      var header = this.$refs.jsHeader
-      var relativePlaceholder = this.$refs.jsHeaderRelativePlaceholder
-      var headerHeight = header.clientHeight
       if (going === 'in' && direction.y === 'up') {
-        this.headerIsFixed = false
-        relativePlaceholder.removeAttribute('style')
+        this.unfixHeader()
       } else if (going === 'out' && direction.y === 'down') {
-        relativePlaceholder.setAttribute('style',
-          'height: ' + headerHeight + 'px; '
-        )
-        this.headerIsFixed = true
+        this.fixHeader()
       }
     },
     waypointHeaderBottom (direction, going) {
-      var header = this.$refs.jsHeader
-      // var relativePlaceholder = this.$refs.jsHeaderRelativePlaceholder
-      var headerHeight = header.clientHeight
-
       if (going === 'out' && direction.y === 'down') {
-        header.setAttribute('style',
-          'transform: translateY(' + -headerHeight + 'px);'
-        )
+        this.hideHeader()
       } else if (going === 'in' && direction.y === 'up') {
-        header.removeAttribute('style')
+        this.unhideHeader()
       }
     }
   }
@@ -126,7 +170,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 /* Base component class
    ====================================================================== */
 .mlc-project-overview {
-  z-index: z("project-header", "relative");
+  z-index: z("fixed", "high");
   position: relative;
   margin-bottom: $unit-xl;
   padding-top: 0;
@@ -141,7 +185,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 .__header-mock-bar {
   &.s-is-fixed {
     width: 100%;
-    z-index: z("project-group-header", "fixed");
+    z-index: z("fixed", "mid");
     padding-left: $unit-md;
     padding-right: $unit-md;
     position: fixed;
@@ -165,7 +209,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 }
 
 .__header {
-  transition: transform .2s ease;
+  transition: transform .2s ease, top .2s ease;
   z-index: 15;
   padding-top: $unit-lg;
   text-align: left;

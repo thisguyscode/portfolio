@@ -44,7 +44,19 @@ export default {
     }
   },
   computed: {
-    cssNavbar: function () {
+    nav () {
+      return this.$refs.jsNavbar
+    },
+    placeholder () {
+      return this.$refs.jsRelativePlaceholder
+    },
+    scrollPosition () {
+      return this.$store.state.scrollPosition
+    },
+    navHeight () {
+      return this.nav.clientHeight
+    },
+    cssNavbar () {
       return {
         's-is-fixed': this.navFixed,
         's-is-styled': this.isStyled
@@ -52,34 +64,35 @@ export default {
     }
   },
   mounted: function () {
+    this.$store.commit('updateNavHeight', this.navHeight)
+    this.updateNav()
     this.$bus.$on('isScrolling', () => {
       this.updateNav()
     })
   },
   methods: {
+    fixNav () {
+      this.navFixed = true
+      this.placeholder.style.height = this.navHeight
+    },
+    unfixNav () {
+      this.navFixed = false
+      this.placeholder.style.height = 0
+    },
     updateNav () {
-      var scrollPosition = this.$store.state.scrollPosition
-      var navbar = this.$refs.jsNavbar
-      var navTop = navbar.offsetTop
-      var navHeight = navbar.clientHeight
-      var relPlaceholder = this.$refs.jsRelativePlaceholder
-      var placeholderTop = relPlaceholder.offsetTop
+      var navTop = this.nav.getBoundingClientRect().top + window.scrollY
+      var placeholderTop = this.placeholder.getBoundingClientRect().top + window.scrollY
 
       if (this.navFixed === false) {
-        if (scrollPosition >= (navTop)) {
-          this.navFixed = true
-          relPlaceholder.style.height = navHeight + 'px'
+        if (this.scrollPosition >= (navTop)) {
+          this.fixNav()
         } else {
-          this.navFixed = false
-          relPlaceholder.removeAttribute('style')
+          this.unfixNav()
         }
       } else if (this.navFixed === true) {
-        if (scrollPosition <= (placeholderTop)) {
-          this.navFixed = false
-          relPlaceholder.removeAttribute('style')
+        if (this.scrollPosition <= (placeholderTop)) {
+          this.unfixNav()
         }
-      } else {
-        console.log('do nothing')
       }
     }
   }

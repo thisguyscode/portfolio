@@ -9,9 +9,11 @@
     </div>
 
     <!-- WAYPOINT / GLASSES -->
-    <atm-no-ssr> 
-      <v-waypoint class="__waypoint" @waypoint="waypointGlasses"></v-waypoint>
-    </atm-no-ssr>
+    <div class="__waypoint" ref="jsWaypoint">
+      <atm-no-ssr> 
+        <v-waypoint @waypoint="waypointGlasses"></v-waypoint>
+      </atm-no-ssr>
+    </div>
 
     <div class="__mock-navbar" :class="cssGlassesMockNavbar">
       <div class="u-wrapper">
@@ -34,7 +36,7 @@
 export default {
   data: () => {
     return {
-      fixed: true
+      fixed: false
     }
   },
   computed: {
@@ -50,12 +52,19 @@ export default {
     }
   },
   mounted () {
+    this.$store.commit('updateScroll')
     this.setGlasses()
   },
   methods: {
     setGlasses () {
-      var glasses = this.$refs.jsGlasses
-      glasses.removeAttribute('style')
+      var scrollPosition = this.$store.state.scrollPosition
+      var waypoint = this.$refs.jsWaypoint
+      var waypointTop = waypoint.getBoundingClientRect().top + window.scrollY
+      if (scrollPosition >= (waypointTop)) {
+        this.fixed = true
+      } else if (scrollPosition <= (waypointTop)) {
+        this.fixed = false
+      }
     },
     waypointGlasses (direction, going) {
       var glasses = this.$refs.jsGlasses
@@ -71,24 +80,26 @@ export default {
       var fixedWidth = fixedOffsets.width
       var fixedTop = fixedOffsets.top
       var fixedLeft = fixedOffsets.left
-
-      if (going === 'in') {
-        glasses.setAttribute('style',
-          'position: fixed;' +
-          'top: ' + fixedTop + 'px; ' +
-          'left: ' + fixedLeft + 'px; ' +
-          'width:' + relativeWidth + 'px; ' +
-          'transition: transform .3s ease-in-out, width .3s ease-in-out;' +
-          'transform: translate(' +
-            (relativeLeft - fixedLeft) + 'px,' +
-            (relativeTop - fixedTop) + 'px' +
-          ');'
-        )
-        setTimeout(() => {
-          glasses.removeAttribute('style')
-          this.fixed = false
-        }, 300)
-      } else if (going === 'out') {
+      if (this.fixed) {
+        if (going === 'in') {
+          glasses.setAttribute('style',
+            'position: fixed;' +
+            'top: ' + fixedTop + 'px; ' +
+            'left: ' + fixedLeft + 'px; ' +
+            'width:' + relativeWidth + 'px; ' +
+            'transition: transform .3s ease-in-out, width .3s ease-in-out;' +
+            'transform: translate(' +
+              (relativeLeft - fixedLeft) + 'px,' +
+              (relativeTop - fixedTop) + 'px' +
+            ');'
+          )
+          setTimeout(() => {
+            glasses.removeAttribute('style')
+            this.fixed = false
+          }, 300)
+        }
+      }
+      if (going === 'out') {
         glasses.setAttribute('style',
           'position: fixed;' +
           'top: ' + relativeTop + 'px; ' +
@@ -105,9 +116,6 @@ export default {
           glasses.removeAttribute('style')
           this.fixed = true
         }, 300)
-      } else {
-        glasses.removeAttribute('style')
-        this.fixed = true
       }
     }
   }
@@ -185,7 +193,7 @@ $glasses-max-width: 264px;
  */
 
 .__glasses {
-  z-index: z("site-header", "glasses");
+  z-index: z("fixed", "highest");
   position: absolute; /*[1]*/
   
   @at-root .__fixed-placeholder,

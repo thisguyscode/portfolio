@@ -29,6 +29,7 @@ export default function ({store}) {
     }
     function onResize () {
       store.commit('updateWindowWidth')
+      store.commit('updateScroll')
       EventBus.$emit('isResizing')
       requestTick()
     }

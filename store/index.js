@@ -2,14 +2,17 @@ import Vuex from 'vuex'
 
 const store = () => new Vuex.Store({
   state: {
-    scrolling: false,
     windowWidth: null,
     scrollPosition: null,
-    navHeight: null
+    navHeight: null,
+    sticky: {
+      Level_1: null,
+      Level_2: null,
+      Level_3: null
+    }
   },
   mutations: {
     updateScroll: (state) => {
-      state.scrolling = !state.scrolling
       state.scrollPosition = window.scrollY
     },
     updateWindowWidth: (state) => {
@@ -17,6 +20,15 @@ const store = () => new Vuex.Store({
     },
     updateNavHeight: (state, number) => {
       state.navHeight = number
+    },
+    updateStickyLevel_1: (state, number) => {
+      state.sticky.Level_1 = number
+    },
+    updateStickyLevel_2: (state, number) => {
+      state.sticky.Level_2 = number
+    },
+    updateStickyLevel_3: (state, number) => {
+      state.sticky.Level_3 = number
     }
   }
 })

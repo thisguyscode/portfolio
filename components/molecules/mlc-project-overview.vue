@@ -4,9 +4,9 @@
     <!-- WAYPOINT -->
     <div class="__waypoint-wrapper">
       <div class="__waypoint" ref="jsWaypointTop">
-        <atm-no-ssr>
-          <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint>
-        </atm-no-ssr>
+         <atm-no-ssr>
+           <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint> 
+        </atm-no-ssr> 
       </div>
     </div>
     
@@ -30,7 +30,7 @@
           <div class="__header__cell  __header__button-wrapper">
             <nuxt-link to="/" class="__header__button">
               <atm-no-ssr>
-                <icon class="__header__button__icon" name="plus"></icon>
+                <icon class="__header__button__icon" name="chevron-right"></icon>
               </atm-no-ssr>
             </nuxt-link>
           </div>
@@ -45,9 +45,9 @@
     
     <div class="__waypoint-wrapper">
       <div class="__waypoint __waypoint-bottom" ref="jsWaypointBottom">
-        <atm-no-ssr>
-          <v-waypoint @waypoint="this.waypointHeaderBottom"></v-waypoint>
-        </atm-no-ssr>
+         <atm-no-ssr>
+           <v-waypoint @waypoint="this.waypointHeaderBottom"></v-waypoint> 
+        </atm-no-ssr> 
       </div>
     </div>
 
@@ -93,10 +93,10 @@ export default {
       return this.$refs.jsHeaderRelativePlaceholder
     },
     waypointTop () {
-      return this.$refs.jsWaypointTop.getBoundingClientRect().top + window.scrollY
+      return this.$refs.jsWaypointTop.getBoundingClientRect().top + window.scrollY + this.navHeight
     },
     waypointBottom () {
-      return this.$refs.jsWaypointBottom.getBoundingClientRect().top + window.scrollY
+      return this.$refs.jsWaypointBottom.getBoundingClientRect().top + window.scrollY + this.navHeight
     }
   },
   mounted () {
@@ -123,12 +123,12 @@ export default {
     setHeader () {
       if (this.scrollPosition >= (this.waypointTop)) {
         this.fixHeader()
-      } else {
+      } else if (this.scrollPosition <= (this.waypointTop)) {
         this.unfixHeader()
       }
       if (this.scrollPosition >= (this.waypointBottom)) {
         this.hideHeader()
-      } else {
+      } else if (this.scrollPosition <= (this.waypointBottom)) {
         this.unhideHeader()
       }
     },
@@ -287,6 +287,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
   position: absolute;
   top: 50%;
   left: 50%;
+  margin-left: 2px;
   transform: translate(-50%,-50%);
 }
 

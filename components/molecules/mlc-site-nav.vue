@@ -69,6 +69,9 @@ export default {
     this.$bus.$on('isScrolling', () => {
       this.updateNav()
     })
+    this.$bus.$on('isResizing', () => {
+      this.updateNav()
+    })
   },
   methods: {
     fixNav () {

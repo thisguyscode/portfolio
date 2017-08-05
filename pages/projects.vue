@@ -13,7 +13,7 @@
     </section>
 
     <div :key="projectGroup.id" v-for="(projectGroup, index) in projectGroups">
-      <ogm-project-group :projectGroup="projectGroup"></ogm-project-group>
+      <ogm-project-group :index="index" :projectGroup="projectGroup"></ogm-project-group>
     </div>
 
   </section>

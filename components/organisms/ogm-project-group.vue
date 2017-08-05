@@ -7,6 +7,7 @@
         
         <div class="__grid-cell-details">
           <mlc-project-group-details
+            :index="index"
             :name="projectGroup.name"
             :logoSrc="projectGroup.logoSrc"
             :link="projectGroup.link"
@@ -34,6 +35,10 @@ import mlcProjectOverview from '~components/molecules/mlc-project-overview'
 
 export default {
   props: {
+    index: {
+      type: Number,
+      required: true
+    },
     projectGroup: {
       type: Object,
       required: true

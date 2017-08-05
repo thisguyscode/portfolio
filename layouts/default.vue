@@ -10,7 +10,7 @@
     <!-- <ogm-temp-nav></ogm-temp-nav> -->
     
     <div class="__content-waypoint-wrapper">
-      <mlc-waypoint class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></mlc-waypoint>
+      <mlc-waypoint class="__content-waypoint" :waypoint="waypointContentTop"></mlc-waypoint>
     </div>
 
     <nuxt/>
@@ -35,7 +35,7 @@ export default {
   },
   data: () => {
     return {
-      contentReached: true
+      contentReached: false
     }
   },
   methods: {

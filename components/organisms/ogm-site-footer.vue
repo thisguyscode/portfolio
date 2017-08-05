@@ -1,12 +1,18 @@
 <template>
   <div class="ogm-site-footer">
-    <p class="__caption">Made with <icon class="__icon" name="heart"></icon> by Jamie Mitchell</p>
+    <p class="__caption">Made with 
+      <mlc-icon class="__icon" name="heart"></mlc-icon>
+      by Jamie Mitchell
+    </p>
   </div>
 </template>
 
 <script>
+import mlcIcon from '~components/molecules/mlc-icon'
 export default {
-
+  components: {
+    mlcIcon
+  }
 }
 </script>
 

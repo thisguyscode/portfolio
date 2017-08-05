@@ -7,6 +7,7 @@
       <input type="email" name="replyto">
       <input type="submit" value="Send">
     </form>
+    <div class="__filler"></div>
   </div>
 </template>
 
@@ -17,5 +18,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  
+  .__filler {
+    height: 2000px;
+  }
 </style>
+

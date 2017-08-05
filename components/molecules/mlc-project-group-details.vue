@@ -19,13 +19,13 @@
             </div>
           </div>
 
-          <div class="__name-relative-placeholder" :class="cssNameRelativePlaceholder"></div>
+           <div class="__name-relative-placeholder" :class="cssNameRelativePlaceholder"></div> 
           
           <div class="__logo-wrapper  __logo-wrapper--landscape">
             <img class="__logo" :src="logoSrc">
           </div>
           
-          <p class="__link-wrapper">
+          <p v-if="link" class="__link-wrapper">
             <a class="__link" :href="link" target="_blank" rel="noopener">
               {{ link }}
             </a>
@@ -36,6 +36,7 @@
     </div><!--END __header -->
 
     <!-- HEADER PLACEHOLDER  -->
+    <!-- <div class="__name-relative-placeholder" :class="cssNameRelativePlaceholder"></div> -->
     <div class="__header-relative-placeholder" ref="jsHeaderRelativePlaceholder"></div>
 
     <p class="__description-main">
@@ -277,16 +278,17 @@ export default {
 
 .__header-relative-placeholder {
   @include mq($from: mobile, $until: desktop) {
-    display: none;
+    // display: none; 
   }
 }
 
 .__header {
+  width: 100%;
   transition: top .2s ease;
   padding-top: $unit-md;
 
   @include mq($from: desktop) {
-    // width: 100%;
+   
   }
 }
 
@@ -333,7 +335,9 @@ export default {
 
 .__link-wrapper {
   @include vr($font-body, $font-size-xs);
-  margin-bottom: $heading-trailer;
+  @include mq($from: desktop) {
+    margin-bottom: $heading-trailer;
+  }
 }
 
 .__link {
@@ -343,7 +347,7 @@ export default {
 .__divider {
   @include mq($from: desktop) {
     height: 1px;
-    background-color: $neutral-30;
+    background-color: $neutral-10;
     width: 100%;
     margin-top: -1px;
   }

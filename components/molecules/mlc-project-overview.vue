@@ -12,23 +12,27 @@
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
-        <div class="__header __header--data-dashboard" ref="jsHeader">
+        <div class="__header" ref="jsHeader" :style="'box-shadow: inset 0 -1px 0 0' + this.color + ';'">
           <div class="__header__cell">
-            <p class="__header__index">{{ index+1 }}</p>
+            <span class="__header__index"> 
+              <svg :style="'fill: ' + this.color + ';'"
+                    v-html="require('!svg-inline-loader?removeSVGTagAttrs=false!~assets/images/letters/' + String.fromCharCode(97 + index) + '.svg')"
+              ></svg>
+            </span>
           </div>
           <div class="__header__cell">
-            <h3 class="__header__title">{{ project.name }}</h3>
+            <h3 class="__header__title" :style="'color:' + this.color + ';'">{{ project.name }}</h3>
           </div>
           <div class="__header__cell  u-hide-mobile-tablet">
-            <p class="__header__label">Role</p>
+            <p class="__header__label" :style="'color:' + this.color + ';'">Role</p>
             <h4 class="__header__role">{{ project.role }}</h4>
           </div>
           <div class="__header__cell  u-hide-mobile-tablet">
-            <p class="__header__label">Date</p>
+            <p class="__header__label" :style="'color:' + this.color + ';'">Date</p>
             <h4 class="__header__date">{{ project.date }}</h4>
           </div>
           <div class="__header__cell  __header__button-wrapper">
-            <nuxt-link to="/" class="__header__button">
+            <nuxt-link to="/" class="__header__button" :style="'background-color:' + this.color + ';'">
               <atm-no-ssr>
                 <icon class="__header__button__icon" name="chevron-right"></icon>
               </atm-no-ssr>
@@ -69,6 +73,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    color: {
+      type: String,
+      default: '#AAA'
     }
   },
   computed: {
@@ -145,6 +153,9 @@ export default {
       } else if (going === 'in' && direction.y === 'up') {
         this.unhideHeader()
       }
+    },
+    nextChar (c) {
+      return String.fromCharCode(c.charCodeAt(0) + 1)
     }
   }
 }
@@ -212,6 +223,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
   transition: transform .2s ease, top .2s ease;
   z-index: 15;
   padding-top: $unit-lg;
+  padding-bottom: $unit-md;
   text-align: left;
   display: flex;
   // margin-bottom: $unit-lg;
@@ -219,6 +231,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 
   @include mq($from: mobile, $until: desktop) {
     padding-top: $unit-xxl;
+    padding-bottom: $unit-lg;
   }
 }
 .__waypoint-wrapper {
@@ -236,14 +249,11 @@ $header-height: $header-padding-y*2 + $header-text-height;
   // bottom: ($navbar-height + $header-height);
 } 
 
-.__header--data-dashboard {
-  box-shadow: inset 0 -1px 0 0 $blue;
 
-  .__header__index {
-    color: $blue;
-  }
-  .__header__label {
-    color: $blue;
+.__header__index {
+  svg {
+    width: 20px;
+    height: 34px;
   }
 }
 
@@ -257,7 +267,7 @@ $header-height: $header-padding-y*2 + $header-text-height;
 
 .__header__index {
   font-weight: 600;
-  @include vr($font-body, $font-size-xxxl);
+  // @include vr($font-body, $font-size-xxxl);
 }
 
 .__header__title {
@@ -311,4 +321,24 @@ $header-height: $header-padding-y*2 + $header-text-height;
 .__image {
   margin-bottom: $paragraph-trailer;
 }
+
+
+
+/* Color variants
+   ====================================================================== */
+
+$color-sc-a: $green;
+$color-sc-b: $purple;
+
+.socialcops-a {
+
+  .__header__title,
+  .__header__label {
+    color: $color-sc-a;
+  }
+  .__header__button {
+    background-color: $color-sc-a;
+  }
+}
+
 </style>

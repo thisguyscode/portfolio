@@ -39,22 +39,34 @@ export default {
             {
               name: 'Project name goes here on 2 lines',
               linkTo: '/socialcops/data-dashboard',
-              color: 'red',
+              color: '#54A94A',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/topography.svg')
+              imgSrc: require('~assets/images/data-dashboard.jpg')
             },
             {
               name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#5D92FD',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
+              imgSrc: require('~assets/images/table.jpg')
+            },
+            {
+              name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#E95B3E',
               date: 'May - Apr 2017',
               role: 'Product Designer',
               imgSrc: require('~assets/images/color-generator.jpg')
             },
             {
               name: 'SCSS-based color palette generator',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#66A604',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/topography.svg')
+              imgSrc: require('~assets/images/slider.jpg')
             }
           ]
         },
@@ -62,28 +74,64 @@ export default {
           name: 'trivago',
           logoSrc: require('~assets/images/logo-trivago-color.svg'),
           link: 'https://trivago.co.uk',
-          descriptionMain: 'Based in Delhi (India), SocialCops is a young and abitious data start-up, operating largely in the social sector.',
-          descriptionSub: 'They have managed to secure massive clients due to their dedication to what they call ‘Data Intelligence’ - using data effectively to glean valuable and actionable insights on a large scale. They are working on a web platform which covers the entire data pipeline, from collection to visualization. I was largely tasked with producing realistic product mockups for said platform for the corporate website, but also had a chance to work on their ‘Visualize’ product',
+          descriptionMain: 'trivago has built a remarkably successful hotel search engine, active in over 50 countries worldwide',
+          descriptionSub: 'During my time with trivago I went from being a lowly intern designing and modifying web banners, to managing a small team of product designers for the core product. Key takeaways were an understanding of scalability and flexibility - for example leaving room for \u201Cbook now\u201D in over 30 languages',
           projects: [
             {
               name: 'Project name goes here on 2 lines',
               linkTo: '/socialcops/data-dashboard',
-              color: 'red',
+              color: '#A11216',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/topography.svg')
+              imgSrc: require('~assets/images/trv-ratings.jpg')
             },
             {
               name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#1A759C',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/color-generator.jpg')
+              imgSrc: require('~assets/images/trv-banners.jpg')
             },
             {
-              name: 'SCSS-based color palette generator',
+              name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#DE760F',
               date: 'May - Apr 2017',
               role: 'Product Designer',
-              imgSrc: require('~assets/images/topography.svg')
+              imgSrc: require('~assets/images/trv-marathon.jpg')
+            }
+          ]
+        },
+        {
+          name: 'Personal Projects',
+          logoSrc: require('~assets/images/logo-glasses.svg'),
+          descriptionMain: 'trivago has built a remarkably successful hotel search engine, active in over 50 countries worldwide',
+          descriptionSub: 'During my time with trivago I went from being a lowly intern designing and modifying web banners, to managing a small team of product designers for the core product. Key takeaways were an understanding of scalability and flexibility - for example leaving room for \u201Cbook now\u201D in over 30 languages',
+          projects: [
+            {
+              name: 'Project name goes here on 2 lines',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#A11216',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
+              imgSrc: require('~assets/images/trv-ratings.jpg')
+            },
+            {
+              name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#1A759C',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
+              imgSrc: require('~assets/images/trv-banners.jpg')
+            },
+            {
+              name: 'Product mockups / screenshots',
+              linkTo: '/socialcops/data-dashboard',
+              color: '#DE760F',
+              date: 'May - Apr 2017',
+              role: 'Product Designer',
+              imgSrc: require('~assets/images/trv-marathon.jpg')
             }
           ]
         }
@@ -122,5 +170,7 @@ export default {
 
 .__quote {
   @include inner-border(bottom, 1px, low);
+  background: $neutral-90;
+  color: $neutral-00
 }
 </style>

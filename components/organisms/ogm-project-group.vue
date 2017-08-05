@@ -17,7 +17,7 @@
         
         <div class="__grid-cell-overview">
           <div :key="project.id" v-for="(project, index) in projectGroup.projects">
-            <mlc-project-overview :index="index" :project="project"></mlc-project-overview>
+            <mlc-project-overview :index="index" :project="project" :color="project.color"></mlc-project-overview>
           </div>
         </div>
 

@@ -76,7 +76,7 @@ export default {
   methods: {
     fixNav () {
       this.navFixed = true
-      this.placeholder.style.height = this.navHeight
+      this.placeholder.style.height = this.navHeight + 'px'
     },
     unfixNav () {
       this.navFixed = false

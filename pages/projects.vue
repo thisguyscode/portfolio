@@ -170,7 +170,9 @@ export default {
 
 .__quote {
   @include inner-border(bottom, 1px, low);
-  background: $neutral-100;
+  background-color: $neutral-90;
+  background-image: url('~assets/images/topography.svg');
+  background-size: 100%;
   color: $neutral-00
 }
 </style>

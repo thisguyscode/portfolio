@@ -27,7 +27,8 @@
           
           <p v-if="link" class="__link-wrapper">
             <a class="__link" :href="link" target="_blank" rel="noopener">
-              Visit Website <icon class="__link-icon" name="external-link"></icon>
+              Visit Website
+              <mlc-icon class="__link-icon" name="external-link"></mlc-icon>
             </a>
           </p>
           <div class="__divider"></div> 
@@ -69,12 +70,16 @@
 </template>
 
 <script>
+import mlcIcon from '~components/molecules/mlc-icon'
 export default {
   data: () => {
     return {
       showDescription: false,
       headerIsFixed: false
     }
+  },
+  components: {
+    mlcIcon
   },
   computed: {
     cssDescriptionSub: function () {

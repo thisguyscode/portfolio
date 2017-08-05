@@ -9,10 +9,10 @@
       </atm-no-ssr>
     </div>
     <!-- HEADER  -->
-    <div class="__header-mock-bar" :class="cssHeaderMockBar" v-scroll-to="'#project-group-top-' + index">
+    <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
         <div class="__header" ref="jsHeader">
-          
+
           <div class="__name-mock-bar" :class="cssNameMockBar">
             <div class="u-wrapper">
               <h3 class="__name">{{ name }}</h3>
@@ -31,6 +31,12 @@
             </a>
           </p>
           <div class="__divider"></div> 
+
+          <a href="#" v-scroll-to="'#project-group-top-' + index">
+            <span class="u-link-bloater"></span>
+          </a>
+
+
         </div>
       </div>
     </div><!--END __header -->
@@ -48,9 +54,10 @@
     </p>
 
     <span @click="toggleDescription">
-      <p class="__description-trigger" v-if="!showDescription">Show more</p>
-      <p class="__description-trigger" v-if="showDescription">Hide</p>
+      <a class="__description-trigger" v-if="!showDescription">Show more</a>
+      <a class="__description-trigger" v-if="showDescription">Hide</a>
     </span>
+
 
     <div class="__waypoint"  ref="jsWaypointBottom">
       <atm-no-ssr> 
@@ -366,6 +373,7 @@ export default {
     z-index: -1;
     height: 1.2em;
     width: 100%;
+    transition: background-color .1s ease-in-out;
     background-color: $neutral-10;
   }
   &:hover {
@@ -394,11 +402,33 @@ export default {
 }
 
 .__description-trigger {
+  @include vr($font-body, $font-size-xs);
+  cursor: pointer;
   z-index: z("clickable-content");
-  display: block;
+  display: inline-block;
   padding-bottom: 0;
+  color: $blue;
   @include mq($from: desktop) {
     display: none;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    height: 1.2em;
+    width: 100%;
+    transition: opacity .1s ease-in-out, background-color .1s ease-in-out;
+    background-color: $blue;
+    opacity: .2;
+  }
+  &:hover {
+    // color: $neutral-00;
+    &:before {
+      opacity: .5;
+      background-color: $blue;
+    }
   }
 }
 

@@ -195,14 +195,14 @@ $header-height: $header-padding-y*2 + $header-text-height;
   margin-bottom: $unit-xl;
   padding-top: 0;
   @include mq($from: desktop) {
-    .__image {
-      transition: filter .2s ease-in;
-      filter: grayscale(50%);
-    }
+    // .__image {
+      // transition: filter .2s ease-out;
+      filter: grayscale(70%);
+    // }
     &:hover {
-      .__image {
+      // .__image {
         filter: grayscale(0);
-      }
+      // }
     }
   }
 }

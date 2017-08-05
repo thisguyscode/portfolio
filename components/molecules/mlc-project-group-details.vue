@@ -1,5 +1,5 @@
 <template>
-  <section class="mlc-project-group-details">
+  <section class="mlc-project-group-details" :id="'project-group-top-' + index">
     
     
     <!-- WAYPOINT -->
@@ -9,7 +9,7 @@
       </atm-no-ssr>
     </div>
     <!-- HEADER  -->
-    <div class="__header-mock-bar" :class="cssHeaderMockBar">
+    <div class="__header-mock-bar" :class="cssHeaderMockBar" v-scroll-to="'#project-group-top-' + index">
       <div class="u-wrapper">
         <div class="__header" ref="jsHeader">
           
@@ -27,7 +27,7 @@
           
           <p v-if="link" class="__link-wrapper">
             <a class="__link" :href="link" target="_blank" rel="noopener">
-              {{ link }}
+              Visit Website <icon class="__link-icon" name="external-link"></icon>
             </a>
           </p>
           <div class="__divider"></div> 
@@ -113,6 +113,10 @@ export default {
     }
   },
   props: {
+    index: {
+      type: Number,
+      required: true
+    },
     name: {
       type: String,
       required: true
@@ -224,6 +228,7 @@ export default {
 .__header-mock-bar {
   z-index: z("fixed", "mid");
   &.s-is-fixed {
+    cursor: pointer;
     @include mq($from: desktop) {
       width: 100%;
       z-index: z("fixed", "low");
@@ -251,17 +256,20 @@ export default {
   z-index: z("fixed", "low");
   &.s-is-fixed {
     @include mq($from: mobile, $until: desktop) {
+      @include inner-border(bottom, 1px);
       width: 100%;
-      background: $neutral-00;
+      background: $neutral-05;
+      color: $neutral-100;
       z-index: z("fixed", "highest");
       padding: $unit-md;
       padding-bottom: 0;
       position: fixed;
       top: $navbar-height;
       left: 0;
-          .__name {
-          padding-bottom:  0;
-        }
+      .__name {
+        font-weight: 600;
+        padding-bottom:  0;
+      }
     }
 
 
@@ -335,13 +343,40 @@ export default {
 
 .__link-wrapper {
   @include vr($font-body, $font-size-xs);
+  
   @include mq($from: desktop) {
     margin-bottom: $heading-trailer;
   }
 }
 
 .__link {
+  // font-weight: 600;
+  position: relative;
+  color: $neutral-100;
   display: inline-block;
+  text-decoration: none;
+  z-index: +1;
+
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    height: 1.2em;
+    width: 100%;
+    background-color: $neutral-10;
+  }
+  &:hover {
+    &:before {
+      background-color: $yellow;
+    }
+  }
+}
+
+.__link-icon {
+  height: 1em;
 }
 
 .__divider {

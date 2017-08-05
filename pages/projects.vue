@@ -12,7 +12,7 @@
       </atm-blockquote>
     </section>
 
-    <div :key="projectGroup.id" v-for="projectGroup in projectGroups">
+    <div :key="projectGroup.id" v-for="(projectGroup, index) in projectGroups">
       <ogm-project-group :projectGroup="projectGroup"></ogm-project-group>
     </div>
 
@@ -170,7 +170,7 @@ export default {
 
 .__quote {
   @include inner-border(bottom, 1px, low);
-  background: $neutral-90;
+  background: $neutral-100;
   color: $neutral-00
 }
 </style>

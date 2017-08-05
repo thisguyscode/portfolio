@@ -12,6 +12,8 @@
     
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
       <div class="u-wrapper">
+        
+        <!-- header  -->
         <div class="__header" ref="jsHeader" :style="'box-shadow: inset 0 -1px 0 0' + this.color + ';'">
           <div class="__header__cell">
             <span class="__header__index"> 
@@ -38,7 +40,10 @@
               </atm-no-ssr>
             </nuxt-link>
           </div>
-        </div>
+          <nuxt-link :to="project.linkTo" v-scroll-to="'#page-top'">
+            <span class="u-link-bloater"></span>
+          </nuxt-link>
+        </div><!--END header -->
       </div>
     </div>
 
@@ -46,6 +51,10 @@
     <div class="__header-relative-placeholder" ref="jsHeaderRelativePlaceholder"></div>
 
     <img class="__image" :src="project.imgSrc"/>
+
+    <nuxt-link :to="project.linkTo" v-scroll-to="'#page-top'">
+      <span class="u-link-bloater"></span>
+    </nuxt-link>
     
     <div class="__waypoint-wrapper">
       <div class="__waypoint __waypoint-bottom" ref="jsWaypointBottom">
@@ -186,7 +195,15 @@ $header-height: $header-padding-y*2 + $header-text-height;
   margin-bottom: $unit-xl;
   padding-top: 0;
   @include mq($from: desktop) {
-    padding-top: 0;
+    .__image {
+      transition: filter .2s ease-in;
+      filter: grayscale(50%);
+    }
+    &:hover {
+      .__image {
+        filter: grayscale(0);
+      }
+    }
   }
 }
 
@@ -230,8 +247,8 @@ $header-height: $header-padding-y*2 + $header-text-height;
   background: white;
 
   @include mq($from: mobile, $until: desktop) {
-    padding-top: $unit-xxl;
-    padding-bottom: $unit-lg;
+    padding-top: $unit-xxl + $unit-md;
+    padding-bottom: $unit-md;
   }
 }
 .__waypoint-wrapper {
@@ -291,6 +308,12 @@ $header-height: $header-padding-y*2 + $header-text-height;
   width: $unit-lg;
   height: $unit-lg;
   color: white;
+
+  &:hover {
+    .__header__button__icon {
+      transform: translate(-50%,-50%) scale(1.1);
+    }
+  }
 }
 
 .__header__button__icon {
@@ -298,7 +321,8 @@ $header-height: $header-padding-y*2 + $header-text-height;
   top: 50%;
   left: 50%;
   margin-left: 2px;
-  transform: translate(-50%,-50%);
+  transition: transform .2s ease-in-out;
+  transform: translate(-50%,-50%) scale(1);
 }
 
 .__header__label {

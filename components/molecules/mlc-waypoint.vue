@@ -1,6 +1,6 @@
 <template>
   <atm-no-ssr>
-    <v-waypoint :position="position" @waypoint="waypoint"></v-waypoint>
+    <v-waypoint :id="id" :position="position" @waypoint="waypoint"></v-waypoint>
   </atm-no-ssr>
 </template>
 
@@ -16,6 +16,10 @@ export default {
       required: false
     },
     position: {
+      type: String,
+      required: false
+    },
+    id: {
       type: String,
       required: false
     }

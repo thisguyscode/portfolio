@@ -8,11 +8,8 @@
       </div>
     </div>
 
-    <!-- WAYPOINT / GLASSES -->
     <div class="__waypoint" ref="jsWaypoint">
-      <atm-no-ssr> 
-        <v-waypoint @waypoint="waypointGlasses"></v-waypoint>
-      </atm-no-ssr>
+      <mlc-waypoint :waypoint="waypointGlasses"></mlc-waypoint>
     </div>
 
     <div class="__mock-navbar" :class="cssGlassesMockNavbar">
@@ -33,7 +30,11 @@
 </template>
 
 <script>
+import mlcWaypoint from '~components/molecules/mlc-waypoint'
 export default {
+  components: {
+    mlcWaypoint
+  },
   data: () => {
     return {
       fixed: false

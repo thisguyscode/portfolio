@@ -10,9 +10,7 @@
     <!-- <ogm-temp-nav></ogm-temp-nav> -->
     
     <div class="__content-waypoint-wrapper">
-      <atm-no-ssr>
-        <v-waypoint class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></v-waypoint>
-      </atm-no-ssr>
+      <mlc-waypoint class="__content-waypoint" id="content-top" @waypoint="waypointContentTop"></mlc-waypoint>
     </div>
 
     <nuxt/>
@@ -26,14 +24,14 @@
 <script>
 import ogmSiteHeader from '~/components/organisms/ogm-site-header'
 import ogmSiteFooter from '~/components/organisms/ogm-site-footer'
-// import ogmTempNav from '~/components/organisms/ogm-temp-nav'
+import mlcWaypoint from '~/components/molecules/mlc-waypoint'
 
 export default {
   scrollToTop: false,
   components: {
     ogmSiteHeader,
-    ogmSiteFooter
-    // ogmTempNav
+    ogmSiteFooter,
+    mlcWaypoint
   },
   data: () => {
     return {

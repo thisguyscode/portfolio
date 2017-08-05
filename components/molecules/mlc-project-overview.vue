@@ -4,9 +4,7 @@
     <!-- WAYPOINT -->
     <div class="__waypoint-wrapper">
       <div class="__waypoint" ref="jsWaypointTop">
-         <atm-no-ssr>
-           <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint> 
-        </atm-no-ssr> 
+        <mlc-waypoint :waypoint="this.waypointHeaderTop"></mlc-waypoint>
       </div>
     </div>
     
@@ -35,9 +33,7 @@
           </div>
           <div class="__header__cell  __header__button-wrapper">
             <nuxt-link to="/" class="__header__button" :style="'background-color:' + this.color + ';'">
-              <atm-no-ssr>
-                <icon class="__header__button__icon" name="chevron-right"></icon>
-              </atm-no-ssr>
+              <mlc-icon class="__header__button__icon" name="chevron-right"></mlc-icon>
             </nuxt-link>
           </div>
           <nuxt-link :to="project.linkTo" v-scroll-to="'#page-top'">
@@ -58,9 +54,7 @@
     
     <div class="__waypoint-wrapper">
       <div class="__waypoint __waypoint-bottom" ref="jsWaypointBottom">
-         <atm-no-ssr>
-           <v-waypoint @waypoint="this.waypointHeaderBottom"></v-waypoint> 
-        </atm-no-ssr> 
+        <mlc-waypoint :waypoint="this.waypointHeaderBottom"></mlc-waypoint>
       </div>
     </div>
 
@@ -68,7 +62,13 @@
 </template>
 
 <script>
+import mlcIcon from '~components/molecules/mlc-icon'
+import mlcWaypoint from '~components/molecules/mlc-waypoint'
 export default {
+  components: {
+    mlcIcon,
+    mlcWaypoint
+  },
   data: () => {
     return {
       headerIsFixed: false

@@ -4,9 +4,7 @@
     
     <!-- WAYPOINT -->
     <div class="__waypoint" ref="jsWaypointTop">
-      <atm-no-ssr> 
-        <v-waypoint @waypoint="this.waypointHeaderTop"></v-waypoint>
-      </atm-no-ssr>
+      <mlc-waypoint :waypoint="this.waypointHeaderTop"></mlc-waypoint>
     </div>
     <!-- HEADER  -->
     <div class="__header-mock-bar" :class="cssHeaderMockBar">
@@ -61,9 +59,7 @@
 
 
     <div class="__waypoint"  ref="jsWaypointBottom">
-      <atm-no-ssr> 
-        <v-waypoint position="bottom" @waypoint="this.waypointHeaderBottom"></v-waypoint>
-      </atm-no-ssr>
+      <mlc-waypoint position="bottom" :waypoint="this.waypointHeaderBottom"></mlc-waypoint>
     </div>
 
   </section>
@@ -71,15 +67,17 @@
 
 <script>
 import mlcIcon from '~components/molecules/mlc-icon'
+import mlcWaypoint from '~components/molecules/mlc-waypoint'
 export default {
+  components: {
+    mlcIcon,
+    mlcWaypoint
+  },
   data: () => {
     return {
       showDescription: false,
       headerIsFixed: false
     }
-  },
-  components: {
-    mlcIcon
   },
   computed: {
     cssDescriptionSub: function () {

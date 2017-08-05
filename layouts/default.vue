@@ -1,6 +1,6 @@
 <template>
   
-  <section id="page-top">
+  <section id="page-top" class="__page">
 
     <div class="u-wrapper">
       <div class="u-baseline-grid"></div>
@@ -17,18 +17,22 @@
 
     <nuxt/>
 
+    <ogm-site-footer></ogm-site-footer>
+
   </section>
   
 </template>
 
 <script>
 import ogmSiteHeader from '~/components/organisms/ogm-site-header'
+import ogmSiteFooter from '~/components/organisms/ogm-site-footer'
 // import ogmTempNav from '~/components/organisms/ogm-temp-nav'
 
 export default {
   scrollToTop: false,
   components: {
-    ogmSiteHeader
+    ogmSiteHeader,
+    ogmSiteFooter
     // ogmTempNav
   },
   data: () => {
@@ -50,6 +54,10 @@ export default {
 
 <style lang="scss" scoped>
 @import "~assets/styles/imports/imports";
+
+.__page {
+  background: $neutral-00;
+}
 
 .__content-waypoint-wrapper {
   position: relative;
